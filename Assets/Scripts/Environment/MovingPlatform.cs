@@ -10,6 +10,7 @@ public class MovingPlatform : MonoBehaviour
     int tickCounter = 0;
     public int ticksRequired = 3;
     public float platformSpeed = 10;
+    [SerializeField] bool active = false;
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -27,6 +28,8 @@ public class MovingPlatform : MonoBehaviour
     }
 
     void UpdateWaypoint() {
+        if(!active) return;
+
         tickCounter++;
         if(tickCounter <= ticksRequired) {
             return;
@@ -38,5 +41,9 @@ public class MovingPlatform : MonoBehaviour
         currentWaypointIndex++;
         if(currentWaypointIndex >= waypoints.Count)
             currentWaypointIndex = 0;
+    }
+
+    public void Activate(bool b) {
+        active = b;
     }
 }

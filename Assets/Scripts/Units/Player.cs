@@ -7,10 +7,13 @@ public class Player : MonoBehaviour, IUnit, ITrigger
 {
     [SerializeField] TileData tileData;
     Vector2 target;
+    [SerializeField] LayerMask obstacleLayer;
     public void Move(Vector2 input, bool undo)
     {
         transform.parent = null;
-        if(CanMove(transform.position + (Vector3)input))
+        Vector3 position = transform.position + (Vector3)input;
+        Collider2D obstacle = Physics2D.OverlapCircle(position, 0.25f, obstacleLayer);
+        if(CanMove(position) && !obstacle)
             target = transform.position + (Vector3)input;
             transform.position = target;
     }
