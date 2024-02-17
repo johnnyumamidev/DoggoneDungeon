@@ -4,12 +4,21 @@ using UnityEngine;
 using System;
 public class LevelNode : MonoBehaviour
 {
-    public event Action<LevelNode> OnPlayerDetected;
-    
+    public event Action<LevelNode, bool> OnPlayerDetected;
+    [SerializeField] bool unlocked = false;
+    [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] Color lockedColor, unlockedColor;
     void Update()
     {
         if(DetectPlayer())
-            OnPlayerDetected?.Invoke(this);
+            OnPlayerDetected?.Invoke(this, unlocked);
+
+        if(unlocked) {
+            spriteRenderer.color = unlockedColor;
+        }
+        else {
+            spriteRenderer.color = lockedColor;
+        }
     }
 
     Player DetectPlayer()
