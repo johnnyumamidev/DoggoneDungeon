@@ -31,4 +31,8 @@ public class LevelNode : MonoBehaviour
         }
         return null;
     }
+
+    public void UnlockLevel() {
+        unlocked = true;
+    }
 }

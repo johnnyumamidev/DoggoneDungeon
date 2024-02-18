@@ -1,18 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class LevelSelectManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI levelDisplayText;
-    LevelNode[] levelNodes;
+    [SerializeField] Transform levelNodesParent;
+    [SerializeField] List<LevelNode> levelNodes = new List<LevelNode>();
     void Start() {
-        levelNodes = FindObjectsOfType<LevelNode>();
+        foreach(Transform node in levelNodesParent) {
+            levelNodes.Add(node.GetComponent<LevelNode>());
+        }
         foreach(LevelNode node in levelNodes) {
             node.OnPlayerDetected += Test;
+        }
+        
+        int index = LevelProgression.instance.levelsCompleted;
+        for(int i = 0; i <= index; i++) {
+            levelNodes[i].UnlockLevel();
         }
     }
     void OnDisable() {
@@ -23,8 +29,6 @@ public class LevelSelectManager : MonoBehaviour
 
     void Update() {
         levelDisplayText.text = " ";
-
-        
     }
     
     void Test(LevelNode levelNode, bool unlocked) {
