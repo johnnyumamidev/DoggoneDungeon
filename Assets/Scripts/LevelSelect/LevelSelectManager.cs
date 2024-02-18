@@ -16,8 +16,9 @@ public class LevelSelectManager : MonoBehaviour
             node.OnPlayerDetected += Test;
         }
         
-        int index = LevelProgression.instance.levelsCompleted;
+        int index = PlayerProgress.instance.levelsCompleted;
         for(int i = 0; i <= index; i++) {
+            if(index > levelNodes.Count) return;
             levelNodes[i].UnlockLevel();
         }
     }

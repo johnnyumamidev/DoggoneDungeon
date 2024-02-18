@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelProgression : MonoBehaviour
+public class PlayerProgress : MonoBehaviour
 {
-    public static LevelProgression instance { get; private set; }
+    public static PlayerProgress instance { get; private set; }
     public int levelsCompleted = 0;
     void Awake() {
         if(instance != null) {
@@ -14,7 +14,6 @@ public class LevelProgression : MonoBehaviour
         else {
             instance = this;
         }
-
     }
     void Start()
     {
@@ -22,5 +21,14 @@ public class LevelProgression : MonoBehaviour
     }
     public void OnLevelCompleted() {
         levelsCompleted++;
+        SaveSystem.SaveProgress(this);
+    }
+    public void ResetProgress() {
+        levelsCompleted = 0;
+    }
+
+    public void GetProgress() {
+        PlayerData data = SaveSystem.LoadFile();
+        levelsCompleted = data.levelsCompleted;
     }
 }

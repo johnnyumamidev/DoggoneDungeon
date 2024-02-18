@@ -17,7 +17,7 @@ public class Goal : MonoBehaviour
         if(collider) {
             Player player = collider.GetComponent<Player>();
             if(player != null) {
-                LevelProgression.instance.OnLevelCompleted();
+                PlayerProgress.instance.OnLevelCompleted();
                 SceneManager.LoadScene("LevelSelect");
             }
         }
