@@ -6,6 +6,7 @@ public class PlayerProgress : MonoBehaviour
 {
     public static PlayerProgress instance { get; private set; }
     public int levelsCompleted = 0;
+    public bool gameStarted = false;
     void Awake() {
         if(instance != null) {
             Debug.Log("More than one instance found in scene");
@@ -24,6 +25,7 @@ public class PlayerProgress : MonoBehaviour
         SaveSystem.SaveProgress(this);
     }
     public void ResetProgress() {
+        gameStarted = true;
         levelsCompleted = 0;
     }
 

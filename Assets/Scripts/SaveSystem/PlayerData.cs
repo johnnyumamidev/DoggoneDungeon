@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerData
 {
     public int levelsCompleted;
+    public bool gameStarted;
     public PlayerData(PlayerProgress playerProgress) {
         levelsCompleted = playerProgress.levelsCompleted;
+        gameStarted = playerProgress.gameStarted;
     }
 }

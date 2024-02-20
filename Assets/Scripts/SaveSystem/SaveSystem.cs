@@ -27,7 +27,7 @@ public static class SaveSystem
             return data;
         }
         else {
-            Debug.LogError("no save data found");
+            Debug.Log("no save data found");
             return null;
         }
     }
