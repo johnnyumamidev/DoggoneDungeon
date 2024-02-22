@@ -48,6 +48,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileData: {fileID: 0}
+  obstacle:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!50 &2147222625
 Rigidbody2D:
   serializedVersion: 4

@@ -23,6 +23,7 @@ public class UserInput : MonoBehaviour
         bool v = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S);
         Vector2 moveVector = GetMovementInput(h, v);
         bool undo = Input.GetKeyDown(KeyCode.Z);
+        bool reset = Input.GetKeyDown(KeyCode.R);
 
         //movement input
         if (moveVector != Vector2.zero)
@@ -48,6 +49,9 @@ public class UserInput : MonoBehaviour
             {
                 unitCommandInvoker.UndoCommand(3);
             }
+        }
+        else if(reset) {
+            //Reset level
         }
     }
 

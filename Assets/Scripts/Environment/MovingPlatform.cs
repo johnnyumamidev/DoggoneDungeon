@@ -7,6 +7,7 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] TimeIncrementManager timeIncrementManager;
     [SerializeField] List<Transform> waypoints = new List<Transform>();
     int currentWaypointIndex = 0;
+    Vector3 currentWaypointPosition;
     int tickCounter = 0;
     public int ticksRequired = 3;
     public float platformSpeed = 10;
@@ -22,7 +23,7 @@ public class MovingPlatform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 currentWaypointPosition = waypoints[currentWaypointIndex].position;
+        currentWaypointPosition = waypoints[currentWaypointIndex].position;
         transform.position = 
             Vector3.Lerp(transform.position, currentWaypointPosition, platformSpeed * Time.deltaTime);
     }
@@ -45,5 +46,13 @@ public class MovingPlatform : MonoBehaviour
 
     public void Activate(bool b) {
         active = b;
+    }
+
+    public bool AtWayPoint() {
+        if(Vector2.Distance(transform.position, currentWaypointPosition) < 0.05f)
+            return true;
+        else {
+            return false;
+        }
     }
 }

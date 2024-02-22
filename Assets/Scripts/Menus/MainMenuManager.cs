@@ -31,7 +31,7 @@ public class MainMenuManager : MonoBehaviour
         }
     }
     public void StartNewGame() {
-        SceneManager.LoadScene("LevelSelect");
+        SceneManager.LoadScene("Introduction");
         PlayerProgress.instance.ResetProgress();
 
         continueButton.interactable = true;

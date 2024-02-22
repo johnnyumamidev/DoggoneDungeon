@@ -1192,7 +1192,7 @@ GameObject:
   - component: {fileID: 930336657}
   - component: {fileID: 930336656}
   m_Layer: 0
-  m_Name: LevelProgress
+  m_Name: PlayerProgress
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
