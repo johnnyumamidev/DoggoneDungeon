@@ -7,9 +7,16 @@ public class PressureTrigger : MonoBehaviour
 {
     public UnityEvent<bool> testEvent;
     bool triggered = false;
+    [SerializeField] SpriteRenderer buttonRenderer;
+    [SerializeField] Color disabledColor, enabledColor;
     void Update()
     {
         triggered = GetColliders();
+        
+        buttonRenderer.color = enabledColor;
+        if(!triggered) 
+            buttonRenderer.color = disabledColor;
+
         testEvent?.Invoke(triggered);
     }
 

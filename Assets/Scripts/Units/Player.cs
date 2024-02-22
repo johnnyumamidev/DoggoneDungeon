@@ -16,7 +16,8 @@ public class Player : MonoBehaviour, IUnit, ITrigger
         if(CanMove(position)) {
             if(obstacle) {
                 IPushable pushable = obstacle.GetComponent<IPushable>();
-                if(!pushable.NoObstacles(position + (Vector3)input)) {
+                Vector3 tileInFrontOfPushable = position + (Vector3)input; 
+                if(!pushable.NoObstacles(tileInFrontOfPushable)) {
                     return;
                 }
             }
@@ -45,5 +46,9 @@ public class Player : MonoBehaviour, IUnit, ITrigger
         if(tileData.ValidTile(target))
             return true;
         return false;
+    }
+
+    public void SetTileData(TileData _tileData) {
+        tileData = _tileData;
     }
 }
