@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
-    bool active = false;
+    [SerializeField] bool active = false;
     float laserLength = 5;
     public Transform LaserRay() {
         if(!active) return null;

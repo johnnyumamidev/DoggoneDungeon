@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Spikes : MonoBehaviour
 {
+    CheckpointSystem checkpointSystem;
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Sprite spikesUpSprite, spikesDownSprite;
     bool active = true;
@@ -26,8 +27,10 @@ public class Spikes : MonoBehaviour
         Collider2D col = Physics2D.OverlapCircle(transform.position, 0.25f);
         if(col && col.TryGetComponent(out IUnit unit)) 
         {
-            //game over
-            Debug.Log("hit " + ((MonoBehaviour)unit).name);
+            Transform unitTransform = ((MonoBehaviour)unit).transform; 
+            if(checkpointSystem == null) 
+                checkpointSystem = FindObjectOfType<CheckpointSystem>();
+            checkpointSystem.PlacePlayerAtCheckpoint(unitTransform);
         }
     }
 }
