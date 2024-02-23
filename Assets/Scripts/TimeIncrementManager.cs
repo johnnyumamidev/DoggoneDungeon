@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using System;
 
 public class TimeIncrementManager : MonoBehaviour
 {
-    public event Action OnTick;
     public float incrementLength = 0.5f;
+    [SerializeField] List<Transform> tickers = new List<Transform>();
     void OnEnable() {
         StartCoroutine(IncrementTime());
     }
@@ -16,7 +17,13 @@ public class TimeIncrementManager : MonoBehaviour
             timer += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        OnTick?.Invoke();
+        NotifyTickers();
         StartCoroutine(IncrementTime());
+    }
+
+    void NotifyTickers() {
+        foreach(Transform ticker in tickers) {
+            ticker.GetComponent<ITicker>().Tick();
+        }
     }
 }

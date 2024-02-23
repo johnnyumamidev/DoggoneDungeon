@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
-    [SerializeField] TimeIncrementManager timeIncrementManager;
     [SerializeField] List<Transform> waypoints = new List<Transform>();
     int currentWaypointIndex = 0;
     Vector3 currentWaypointPosition;
@@ -12,15 +11,6 @@ public class MovingPlatform : MonoBehaviour
     public int ticksRequired = 3;
     public float platformSpeed = 10;
     [SerializeField] bool active = false;
-    // Start is called before the first frame update
-    void OnEnable()
-    {
-        timeIncrementManager.OnTick += UpdateWaypoint;
-    }
-    void OnDisable() {
-        timeIncrementManager.OnTick -= UpdateWaypoint;
-    }
-    // Update is called once per frame
     void Update()
     {
         currentWaypointPosition = waypoints[currentWaypointIndex].position;
@@ -28,7 +18,7 @@ public class MovingPlatform : MonoBehaviour
             Vector3.Lerp(transform.position, currentWaypointPosition, platformSpeed * Time.deltaTime);
     }
 
-    void UpdateWaypoint() {
+    public void UpdateWaypoint() {
         if(!active) return;
 
         tickCounter++;

@@ -20,7 +20,6 @@ public class Spikes : MonoBehaviour
     void Update() {
         DetectUnits();
     }
-
     void DetectUnits() {
         if(!active) return;
 
