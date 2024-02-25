@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingPlatform : MonoBehaviour
+public class MovingPlatform : MonoBehaviour, ITicker
 {
     [SerializeField] List<Transform> waypoints = new List<Transform>();
     int currentWaypointIndex = 0;
@@ -14,6 +14,7 @@ public class MovingPlatform : MonoBehaviour
     void Update()
     {
         currentWaypointPosition = waypoints[currentWaypointIndex].position;
+        if(!active) return;
         transform.position = 
             Vector3.Lerp(transform.position, currentWaypointPosition, platformSpeed * Time.deltaTime);
     }
@@ -44,5 +45,10 @@ public class MovingPlatform : MonoBehaviour
         else {
             return false;
         }
+    }
+
+    public void Tick()
+    {
+        UpdateWaypoint();
     }
 }

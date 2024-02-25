@@ -50,7 +50,7 @@ MonoBehaviour:
   tileData: {fileID: 0}
   obstacle:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 576
 --- !u!50 &2147222625
 Rigidbody2D:
   serializedVersion: 4
