@@ -1327,7 +1327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187948215329011580, guid: 6b5709ffdf77eb64a99fdcff268380b2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.00006
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 7187948215329011580, guid: 6b5709ffdf77eb64a99fdcff268380b2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1568,6 +1568,14 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 538522386040847405, guid: 82764cde0d0ff9842b41dc56f32b9c6c, type: 3}
+      propertyPath: m_Size.x
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 538522386040847405, guid: 82764cde0d0ff9842b41dc56f32b9c6c, type: 3}
+      propertyPath: m_Size.y
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 538522386040847407, guid: 82764cde0d0ff9842b41dc56f32b9c6c, type: 3}
       propertyPath: m_Name
       value: Battery
@@ -1586,7 +1594,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 538522386040847410, guid: 82764cde0d0ff9842b41dc56f32b9c6c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.00006
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 538522386040847410, guid: 82764cde0d0ff9842b41dc56f32b9c6c, type: 3}
       propertyPath: m_LocalPosition.z

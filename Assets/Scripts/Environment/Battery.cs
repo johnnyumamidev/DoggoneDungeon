@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Battery : MonoBehaviour, IPushable
+public class Battery : MonoBehaviour
 {
     public UnityEvent<bool> emitPower;
     [SerializeField] Laser laser;
@@ -33,16 +33,5 @@ public class Battery : MonoBehaviour, IPushable
         else {
             emitPower?.Invoke(reversePower);
         }
-    }
-
-    public void Push(Vector2 vector)
-    {
-        Debug.Log(name + " pushed");
-        transform.position += (Vector3)vector;
-    }
-
-    public bool NoObstacles(Vector2 vector)
-    {
-        return false;
     }
 }

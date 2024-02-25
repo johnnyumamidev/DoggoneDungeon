@@ -16,12 +16,14 @@ public class Player : MonoBehaviour, IUnit, ITrigger
         if(CanMove(position)) {
             if(obstacle) {
                 IPushable pushable = obstacle.GetComponent<IPushable>();
-                if(pushable == null)
-                    return;
-
-                Vector3 tileInFrontOfPushable = position + (Vector3)input; 
-                if(!pushable.NoObstacles(tileInFrontOfPushable))
-                    return;
+                if(pushable == null) {
+                    //do nothing   
+                }
+                else {
+                    Vector3 tileInFrontOfPushable = position + (Vector3)input; 
+                    if(!pushable.NoObstacles(tileInFrontOfPushable))
+                        return;
+                }
             }
             transform.position = roundedPosition;
         } 
