@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
   m_Name: CW_NWBelt
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 21300000, guid: ca5d8c85d63ff2b4ab57fff21e4fda05, type: 3}
+  m_DefaultSprite: {fileID: 1627801096, guid: bae7486bf549e4f48a18153891120b50, type: 3}
   m_DefaultGameObject: {fileID: 6010459163149594837, guid: aaaa0a8a8d1d3d74499e344faae3fd0f, type: 3}
   m_DefaultColliderType: 1
   m_TilingRules:
