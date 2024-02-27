@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ConveyorBelt : MonoBehaviour, ITicker
 {
-    [SerializeField] ConveyorBeltNode[] conveyorBeltNodes;
+    [SerializeField] List<ConveyorBeltNode> conveyorBeltNodes;
+    bool active = true;
     void Awake() {
-        conveyorBeltNodes = GetComponentsInChildren<ConveyorBeltNode>();
+        ConveyorBeltNode[] nodes = FindObjectsOfType<ConveyorBeltNode>();
+        foreach(ConveyorBeltNode node in nodes) {
+            conveyorBeltNodes.Add(node);
+        }
     }
     void Start()
     {
@@ -21,8 +26,14 @@ public class ConveyorBelt : MonoBehaviour, ITicker
 
     public void Tick()
     {
+        if(!active) 
+            return;
+
         foreach(ConveyorBeltNode node in conveyorBeltNodes) {
             node.MoveTriggerTransform();
         }
+    }
+    public void Activate(bool b) {
+        active = b;
     }
 }

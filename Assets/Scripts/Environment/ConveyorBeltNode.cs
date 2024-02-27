@@ -27,7 +27,11 @@ public class ConveyorBeltNode : MonoBehaviour
     public void MoveTriggerTransform() {
         Vector3 moveDirection = directionTarget.position - transform.position;
         Collider2D obstacle = Physics2D.OverlapCircle(directionTarget.position, 0.25f);
-        if(triggerTransform != null && !obstacle)
+        if(triggerTransform != null && !obstacle) {
             triggerTransform.position += moveDirection;
+            if(triggerTransform.parent != null) {
+                triggerTransform.parent = null;
+            }
+        }
     }
 }

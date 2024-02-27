@@ -5,6 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class Bridge : MonoBehaviour
 {
+    Transform[] conveyorNodeChildren;
     [SerializeField] TileBase bridgeTile;
     [SerializeField] Tilemap groundTilemap;
     bool active;
@@ -18,6 +19,13 @@ public class Bridge : MonoBehaviour
         }
         else {
             groundTilemap.SetTile(tilePosition, null);
+        }
+
+        EnableChildren(active);
+    }
+    void EnableChildren(bool a) {
+        foreach(Transform child in transform) {
+            child.gameObject.SetActive(a);
         }
     }
 }
