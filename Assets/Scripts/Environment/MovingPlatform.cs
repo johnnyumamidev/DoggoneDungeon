@@ -14,7 +14,6 @@ public class MovingPlatform : MonoBehaviour, ITicker
     void Update()
     {
         currentWaypointPosition = waypoints[currentWaypointIndex].position;
-        if(!active) return;
         transform.position = 
             Vector3.Lerp(transform.position, currentWaypointPosition, platformSpeed * Time.deltaTime);
     }
@@ -50,5 +49,9 @@ public class MovingPlatform : MonoBehaviour, ITicker
     public void Tick()
     {
         UpdateWaypoint();
+    }
+
+    public void ChangeWaypoint(int i) {
+        currentWaypointIndex = i;
     }
 }

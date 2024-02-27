@@ -13,7 +13,7 @@ public class Player : MonoBehaviour, IUnit, ITrigger
         Vector3 roundedPosition = new Vector3(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.y), 0);
         Collider2D obstacle = Physics2D.OverlapCircle(position, 0.25f, obstacleLayer);
         
-        if(CanMove(position)) {
+        if(CanMove(position, obstacle)) {
             if(obstacle) {
                 IPushable pushable = obstacle.GetComponent<IPushable>();
                 if(pushable == null) {
@@ -23,13 +23,20 @@ public class Player : MonoBehaviour, IUnit, ITrigger
                     Vector3 tileInFrontOfPushable = position + (Vector3)input; 
                     if(!pushable.NoObstacles(tileInFrontOfPushable))
                         return;
+                    
+                    Collider2D[] colliders = Physics2D.OverlapCircleAll(position, 0.25f);
+                    foreach(Collider2D collider in colliders) {
+                        if(collider.TryGetComponent(out Spikes spikes)) {
+                            return;
+                        }
+                    }
                 }
             }
             transform.position = roundedPosition;
         } 
     }
 
-    public bool CanMove(Vector3 target) {
+    public bool CanMove(Vector3 target, Collider2D obstacle) {
         if(onMovingPlatform) {
             if(tileData.ValidTile(target)) {
                 transform.parent = null;
@@ -37,14 +44,19 @@ public class Player : MonoBehaviour, IUnit, ITrigger
             } 
         }
 
-        Collider2D platformCol = Physics2D.OverlapCircle(target, 0.25f); 
-        if(platformCol && platformCol.TryGetComponent(out MovingPlatform _movingPlatform)) {
-            if(!_movingPlatform.AtWayPoint()) 
+        Collider2D colliderCheck = Physics2D.OverlapCircle(target, 0.25f); 
+        if(colliderCheck) {
+            if(colliderCheck.TryGetComponent(out MovingPlatform _movingPlatform)) {
+                if(!_movingPlatform.AtWayPoint() || obstacle) 
+                    return false;
+                transform.parent = _movingPlatform.transform;
+                transform.localPosition = Vector3.zero;
+                onMovingPlatform = true;
+                return true;
+            }
+
+            if(colliderCheck.TryGetComponent(out IInteractable interactable)) 
                 return false;
-            transform.parent = _movingPlatform.transform;
-            transform.localPosition = Vector3.zero;
-            onMovingPlatform = true;
-            return true;
         }
         
         if(tileData.ValidTile(target))
@@ -54,5 +66,13 @@ public class Player : MonoBehaviour, IUnit, ITrigger
 
     public void SetTileData(TileData _tileData) {
         tileData = _tileData;
+    }
+
+    void Update() {
+        if(!tileData.ValidTile(transform.position) && !onMovingPlatform) {
+            Debug.Log("fall");
+            CheckpointSystem checkpointSystem = FindObjectOfType<CheckpointSystem>();
+            checkpointSystem.PlacePlayerAtCheckpoint(transform);
+        }
     }
 }

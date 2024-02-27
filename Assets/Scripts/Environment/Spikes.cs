@@ -28,8 +28,10 @@ public class Spikes : MonoBehaviour
         if(col && col.TryGetComponent(out IUnit unit)) 
         {
             Transform unitTransform = ((MonoBehaviour)unit).transform; 
-            if(checkpointSystem == null) 
+            if(checkpointSystem == null) {
                 checkpointSystem = FindObjectOfType<CheckpointSystem>();
+                return;
+            }
             checkpointSystem.PlacePlayerAtCheckpoint(unitTransform);
         }
     }
