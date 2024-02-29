@@ -1161,6 +1161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87b558714b40e4d49956e3bc84def8fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelToLoad: LevelSelect
   continueText: {fileID: 1480964477}
   continueButton: {fileID: 2089930203}
   disabledColor: {r: 1, g: 1, b: 1, a: 0.4117647}

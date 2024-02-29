@@ -19,9 +19,7 @@ public class UserInput : MonoBehaviour
 
     private void HandleGameInput()
     {
-        bool h = Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D);
-        bool v = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S);
-        Vector2 moveVector = GetMovementInput(h, v);
+        Vector2 moveVector = GetMovementInput();
         bool undo = Input.GetKeyDown(KeyCode.Z);
         bool reset = Input.GetKeyDown(KeyCode.R);
 
@@ -55,13 +53,15 @@ public class UserInput : MonoBehaviour
         }
     }
 
-    public Vector2 GetMovementInput(bool horizontalPressed, bool verticalPressed) {
-        if(horizontalPressed)
+    public Vector2 GetMovementInput() {
+        bool h = Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D);
+        bool v = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S);
+        if(h)
         {
             float horizontal = Input.GetAxisRaw("Horizontal");
             return new Vector2(horizontal, 0);
         }
-        else if(verticalPressed)
+        else if(v)
         {
             float vertical = Input.GetAxisRaw("Vertical");
             return new Vector2(0, vertical);

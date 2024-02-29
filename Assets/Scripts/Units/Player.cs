@@ -70,9 +70,8 @@ public class Player : MonoBehaviour, IUnit, ITrigger
 
     void Update() {
         if(!tileData.ValidTile(transform.position) && !onMovingPlatform) {
-            Debug.Log("fall");
             CheckpointSystem checkpointSystem = FindObjectOfType<CheckpointSystem>();
-            checkpointSystem.PlacePlayerAtCheckpoint(transform);
+            checkpointSystem?.PlacePlayerAtCheckpoint(transform);
         }
     }
 }

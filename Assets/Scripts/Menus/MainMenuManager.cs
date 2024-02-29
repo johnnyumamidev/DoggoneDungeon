@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
+    [SerializeField] string levelToLoad;
     [SerializeField] TextMeshProUGUI continueText;
     [SerializeField] Button continueButton;
     [SerializeField] Color disabledColor, enabledColor;
@@ -31,7 +32,7 @@ public class MainMenuManager : MonoBehaviour
         }
     }
     public void StartNewGame() {
-        SceneManager.LoadScene("Introduction");
+        SceneManager.LoadScene(levelToLoad);
         PlayerProgress.instance.ResetProgress();
 
         continueButton.interactable = true;
