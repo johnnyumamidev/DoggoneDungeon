@@ -15,7 +15,8 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] GameObject newGameWarning;
     void Start() {
         newGameWarning.SetActive(false);
-        PlayerData data = SaveSystem.LoadFile(); 
+        PlayerData data = SaveSystem.LoadFile();
+        Debug.Log(data.gameStarted); 
         if(data != null && data.gameStarted) {
             Debug.Log("game file exists");
             continueButton.interactable = true;

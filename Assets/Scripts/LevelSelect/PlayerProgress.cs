@@ -21,9 +21,11 @@ public class PlayerProgress : MonoBehaviour
         DontDestroyOnLoad(this);
     }
     public void OnLevelCompleted() {
+        gameStarted = true;
         levelsCompleted++;
         SaveSystem.SaveProgress(this);
     }
+
     public void ResetProgress() {
         gameStarted = true;
         levelsCompleted = 0;

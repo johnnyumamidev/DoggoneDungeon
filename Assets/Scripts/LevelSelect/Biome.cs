@@ -7,6 +7,17 @@ public class Biome : MonoBehaviour
     [SerializeField] TileData tileData;
     [SerializeField] GameObject biomeMap;
     [SerializeField] Transform start;
+    public bool unlocked = false;
+
+    [SerializeField] SpriteRenderer spriteRenderer;
+
+    void Update() {
+        if(unlocked)
+            spriteRenderer.color = Color.white;
+        else {
+            spriteRenderer.color = Color.red;
+        }
+    }
     public void OpenBiome(Player player) {
         Debug.Log("open " + name);
         biomeMap.SetActive(true);

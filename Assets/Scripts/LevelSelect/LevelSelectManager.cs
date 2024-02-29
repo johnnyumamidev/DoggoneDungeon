@@ -5,12 +5,15 @@ using System.Collections.Generic;
 
 public class LevelSelectManager : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI levelDisplayText;
-    [SerializeField] Transform levelNodesParent;
+    [SerializeField] WorldMapManager worldMapManager;
+    [SerializeField] TextMeshProUGUI displayText;
+    [SerializeField] List<Transform> levelNodesParents = new List<Transform>();
     [SerializeField] List<LevelNode> levelNodes = new List<LevelNode>();
     void Start() {
-        foreach(Transform node in levelNodesParent) {
-            levelNodes.Add(node.GetComponent<LevelNode>());
+        foreach(Transform levelNodesParent in levelNodesParents) {
+            foreach(Transform node in levelNodesParent) {
+                levelNodes.Add(node.GetComponent<LevelNode>());
+            }
         }
         foreach(LevelNode node in levelNodes) {
             node.OnPlayerDetected += Test;
@@ -28,17 +31,13 @@ public class LevelSelectManager : MonoBehaviour
         }
     }
 
-    void Update() {
-        levelDisplayText.text = " ";
-    }
-    
     void Test(LevelNode levelNode, bool unlocked) {
         if(unlocked)
-            levelDisplayText.text = levelNode.name;
+            displayText.text = levelNode.name;
         else {
-            levelDisplayText.text = levelNode.name + " (LOCKED)";   
+            displayText.text = levelNode.name + " (LOCKED)";   
         }
-
+        
         if(Input.GetKeyDown(KeyCode.Space) && unlocked) {
             SceneManager.LoadScene(levelNode.name);
         }

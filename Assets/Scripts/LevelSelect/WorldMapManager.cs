@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-
+using TMPro;
 public class WorldMapManager : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI displayText;
     [SerializeField] Player player;
     [SerializeField] UserInput userInput;
     public enum MapView { World, Biome }
@@ -19,16 +19,12 @@ public class WorldMapManager : MonoBehaviour
         if(userInput == null) 
             userInput = FindObjectOfType<UserInput>();
     }
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
     void Update()
     {
         bool hide = true;
         float camSize = worldCamSize;
+        Biome currentBiome = biomes[currentBiomeIndex].GetComponent<Biome>();
         if(currentView == MapView.Biome) {
             hide = false;
             camSize = biomeCamSize;
@@ -40,14 +36,23 @@ public class WorldMapManager : MonoBehaviour
         world.SetActive(hide);
         Camera.main.orthographicSize = camSize;
 
-        if(Input.GetKeyDown(KeyCode.Space))
-            HandleSelectBiome();
+        if(currentView == MapView.World && Input.GetKeyDown(KeyCode.Space))
+            EnterBiome(currentBiome);
+        else if(currentView == MapView.Biome && Input.GetKeyDown(KeyCode.B)) {
+            ExitBiome(currentBiome);
+        }
+
+        if(currentView == MapView.World)
+            displayText.text = biomes[currentBiomeIndex].name;
+        else {
+            displayText.text = " ";
+        }
     }
 
     void HandleMoveBetweenBiomes(float value) {
         if(value < 0) {
             //go up levels
-            if(currentBiomeIndex > 0)
+            if(currentBiomeIndex > 0 )
                 currentBiomeIndex--;
             else {
                 currentBiomeIndex = biomes.Count - 1;
@@ -61,20 +66,19 @@ public class WorldMapManager : MonoBehaviour
             }
         }
     }
-    void HandleSelectBiome() {
-        Biome currentBiome = biomes[currentBiomeIndex].GetComponent<Biome>();
-        if(currentView == MapView.Biome) {
-            currentView = MapView.World;
-            currentBiome.CloseBiome();
-            return;
-        }
-        
+    void EnterBiome(Biome currentBiome) {
         currentView = MapView.Biome;
         currentBiome.OpenBiome(player);
     }
-    void HideBiomes(bool b) {
-        foreach(GameObject biome in biomes) {
-            biome.SetActive(!b);
+    void ExitBiome(Biome currentBiome) {
+        currentView = MapView.World;
+        currentBiome.CloseBiome();
+    }
+    public void UnlockBiome(GameObject biome) {
+        if(!biomes.Contains(biome)) {
+            biomes.Add(biome);
+            Biome _biome = biome.GetComponent<Biome>();
+            _biome.unlocked = true;
         }
     }
 }
