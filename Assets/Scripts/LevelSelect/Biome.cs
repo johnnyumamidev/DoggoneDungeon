@@ -10,10 +10,13 @@ public class Biome : MonoBehaviour
     public bool unlocked = false;
 
     [SerializeField] SpriteRenderer spriteRenderer;
-
+    Color biomeColor;
+    void Start() {
+        biomeColor = spriteRenderer.color;
+    }
     void Update() {
         if(unlocked)
-            spriteRenderer.color = Color.white;
+            spriteRenderer.color = biomeColor;
         else {
             spriteRenderer.color = Color.red;
         }
