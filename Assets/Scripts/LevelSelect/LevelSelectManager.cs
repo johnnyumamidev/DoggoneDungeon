@@ -1,6 +1,5 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
 public class LevelSelectManager : MonoBehaviour
@@ -19,7 +18,7 @@ public class LevelSelectManager : MonoBehaviour
             node.OnPlayerDetected += Test;
         }
         
-        int index = PlayerProgress.instance.levelsCompleted;
+        int index = PlayerProgress.Instance.levelsCompleted;
         for(int i = 0; i <= index; i++) {
             if(index > levelNodes.Count) return;
             levelNodes[i].UnlockLevel();
@@ -39,7 +38,7 @@ public class LevelSelectManager : MonoBehaviour
         }
         
         if(Input.GetKeyDown(KeyCode.Space) && unlocked) {
-            SceneManager.LoadScene(levelNode.name);
+            SceneTransitionManager.Instance.TransitionTo(levelNode.name);
         }
     }
 }

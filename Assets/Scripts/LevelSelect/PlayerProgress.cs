@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class PlayerProgress : MonoBehaviour
 {
-    public static PlayerProgress instance { get; private set; }
+    public static PlayerProgress Instance { get; private set; }
     public int levelsCompleted = 0;
     public bool gameStarted = false;
     void Awake() {
-        if(instance != null) {
+        if(Instance != null) {
             Debug.Log("More than one instance found in scene");
             Destroy(this.gameObject);
         }
         else {
-            instance = this;
+            Instance = this;
         }
     }
     void Start()

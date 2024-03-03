@@ -2,23 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Key : MonoBehaviour
+public class Key : MonoBehaviour, IPushable
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] LevelManager levelManager;
+    [SerializeField] TileData tileData;
+    void Start() {
+        if(tileData == null) {
+            tileData = FindObjectOfType<TileData>();
+        }
+        levelManager = FindObjectOfType<LevelManager>();
+    }
+    public bool NoObstacles(Vector2 vector)
     {
-        
+        throw new System.NotImplementedException();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Push(Vector2 vector)
     {
-        Collider2D collider = Physics2D.OverlapCircle(transform.position, 0.25f);
-        if(collider) {
-            CageBlock cage = collider.GetComponent<CageBlock>();
-            if(cage != null) {
-                Debug.Log("saved the dog!");
-            }
+        if(tileData.ValidTile(transform.position + (Vector3)vector))
+            transform.position += (Vector3)vector;
+    }
+
+    void OnTriggerEnter2D(Collider2D collider) {
+        if(collider.TryGetComponent(out CageBlock cage)) {
+            Debug.Log("unlock cage, save doggy!");
+            levelManager.GoToLevelSelectScreen();
+            PlayerProgress.Instance.OnLevelCompleted();
         }
     }
 }
