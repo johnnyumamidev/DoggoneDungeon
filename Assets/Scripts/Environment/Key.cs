@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class Key : MonoBehaviour, IPushable
 {
-    [SerializeField] LevelManager levelManager;
     [SerializeField] TileData tileData;
     void Start() {
         if(tileData == null) {
             tileData = FindObjectOfType<TileData>();
         }
-        levelManager = FindObjectOfType<LevelManager>();
     }
     public bool NoObstacles(Vector2 vector)
     {
@@ -26,7 +24,7 @@ public class Key : MonoBehaviour, IPushable
     void OnTriggerEnter2D(Collider2D collider) {
         if(collider.TryGetComponent(out CageBlock cage)) {
             Debug.Log("unlock cage, save doggy!");
-            levelManager.GoToLevelSelectScreen();
+            GameStateManager.Instance.TransitionTo("LevelSelect");
             PlayerProgress.Instance.OnLevelCompleted();
         }
     }

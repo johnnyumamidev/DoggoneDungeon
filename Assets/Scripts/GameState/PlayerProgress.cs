@@ -7,18 +7,8 @@ public class PlayerProgress : MonoBehaviour
     public static PlayerProgress Instance { get; private set; }
     public int levelsCompleted = 0;
     public bool gameStarted = false;
-    void Awake() {
-        if(Instance != null) {
-            Debug.Log("More than one instance found in scene");
-            Destroy(this.gameObject);
-        }
-        else {
-            Instance = this;
-        }
-    }
-    void Start()
-    {
-        DontDestroyOnLoad(this);
+    void Start() {
+        Instance = this;
     }
     public void OnLevelCompleted() {
         gameStarted = true;

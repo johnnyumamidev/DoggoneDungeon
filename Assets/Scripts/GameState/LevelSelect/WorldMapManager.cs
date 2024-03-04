@@ -13,11 +13,42 @@ public class WorldMapManager : MonoBehaviour
     [SerializeField] List<GameObject> biomes = new List<GameObject>();
     [SerializeField] int currentBiomeIndex = 0;
     [SerializeField] float worldCamSize, biomeCamSize;
+    [SerializeField] List<Transform> levelNodesParents = new List<Transform>();
+    [SerializeField] List<LevelNode> levelNodes = new List<LevelNode>();
+    
     void Awake() {
         if(player == null) 
             player = FindObjectOfType<Player>();
         if(userInput == null) 
             userInput = FindObjectOfType<UserInput>();
+    }
+
+    void Start() {
+        foreach(Transform levelNodesParent in levelNodesParents) {
+            foreach(Transform node in levelNodesParent) {
+                levelNodes.Add(node.GetComponent<LevelNode>());
+            }
+        }
+        foreach(LevelNode node in levelNodes) {
+            node.OnPlayerDetected += EnterLevel;
+        }
+        
+        int index = PlayerProgress.Instance.levelsCompleted;
+        for(int i = 0; i <= index; i++) {
+            if(index > levelNodes.Count) return;
+            levelNodes[i].UnlockLevel();
+        }
+    }
+    void OnDisable() {
+        foreach(LevelNode node in levelNodes) {
+            node.OnPlayerDetected -= EnterLevel;
+        }
+    }
+
+    void EnterLevel(LevelNode levelNode, bool unlocked) {
+        if(Input.GetKeyDown(KeyCode.Space) && unlocked) {
+            GameStateManager.Instance.TransitionTo(levelNode.name);
+        }
     }
 
     void Update()

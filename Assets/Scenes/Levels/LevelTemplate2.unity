@@ -1664,7 +1664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20f81477d09051742bc540de2a7a64fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundTilemap: {fileID: 0}
+  groundTilemap: {fileID: 408433212}
   wallsTilemap: {fileID: 1689380443}
 --- !u!1 &519420028
 GameObject:

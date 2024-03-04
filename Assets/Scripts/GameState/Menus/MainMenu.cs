@@ -4,24 +4,27 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class MainMenuManager : MonoBehaviour
+public class MainMenu : MonoBehaviour
 {
-    [SerializeField] string levelToLoad;
-    [SerializeField] TextMeshProUGUI continueText;
-    [SerializeField] Button continueButton;
+    public GameObject newGameWarning;
+    public TextMeshProUGUI continueText;
+    public Button continueButton;
+    public Button newGamebutton;
     [SerializeField] Color disabledColor, enabledColor;
-    [Header("Test")]
-    [SerializeField] GameObject newGameWarning;
+
     void Start() {
         newGameWarning.SetActive(false);
         PlayerData data = SaveSystem.LoadFile();
-        Debug.Log(data.gameStarted); 
-        if(data != null && data.gameStarted) {
+        Debug.Log("gameStarted? " + data.gameStarted);
+
+        if (data != null && data.gameStarted)
+        {
             Debug.Log("game file exists");
             continueButton.interactable = true;
             continueText.color = enabledColor;
         }
     }
+    
     public void CheckForSaveData() {
         PlayerData data = SaveSystem.LoadFile(); 
         if(data != null && data.gameStarted) {
@@ -32,15 +35,13 @@ public class MainMenuManager : MonoBehaviour
         }
     }
     public void StartNewGame() {
-        SceneTransitionManager.Instance.TransitionTo(levelToLoad);
+        GameStateManager.Instance.TransitionTo("LevelSelect");
         PlayerProgress.Instance.ResetProgress();
-
-        continueButton.interactable = true;
-        continueText.color = enabledColor;
     }
 
     public void ContinueGame() {
-        SceneTransitionManager.Instance.TransitionTo("LevelSelect");
+        GameStateManager.Instance.TransitionTo("LevelSelect");
         PlayerProgress.Instance.GetProgress();
     }
 }
+

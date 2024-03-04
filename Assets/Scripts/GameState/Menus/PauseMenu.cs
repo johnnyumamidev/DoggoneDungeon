@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
@@ -14,6 +13,9 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(b);
     }
     public void GoToTitleScreen() {
-        SceneManager.LoadScene("MainMenu");
+        GameStateManager.Instance.TransitionTo("MainMenu");
+    }
+    public void GoToMap() {
+        GameStateManager.Instance.TransitionTo("LevelSelect");
     }
 }
