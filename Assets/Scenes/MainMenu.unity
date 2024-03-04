@@ -286,6 +286,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 563ff5fa5ec1ed1478236bd174928959, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  active: 0
+  <isComplete>k__BackingField: 0
 --- !u!4 &34562215
 Transform:
   m_ObjectHideFlags: 0
@@ -1255,6 +1257,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87b558714b40e4d49956e3bc84def8fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  active: 0
+  <isComplete>k__BackingField: 0
 --- !u!4 &739662707
 Transform:
   m_ObjectHideFlags: 0
@@ -1270,6 +1274,53 @@ Transform:
   m_Father: {fileID: 1381787636}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &831443663
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 831443664}
+  - component: {fileID: 831443665}
+  m_Layer: 0
+  m_Name: UserInput
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &831443664
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831443663}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1381787636}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &831443665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831443663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42072ec8260689d42a7054eb6e79d639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &930336655
 GameObject:
   m_ObjectHideFlags: 0
@@ -2081,6 +2132,7 @@ Transform:
   - {fileID: 34562215}
   - {fileID: 1564605867}
   - {fileID: 739662707}
+  - {fileID: 831443664}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2265,6 +2317,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc26596fd5b2a149a28ebca90f048bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  active: 0
+  <isComplete>k__BackingField: 0
 --- !u!1 &1774823205
 GameObject:
   m_ObjectHideFlags: 0
