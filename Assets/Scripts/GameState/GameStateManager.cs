@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameStateManager : MonoBehaviour
 {
     public static GameStateManager Instance { get; private set; }
+    public bool gamePaused = false;
     void Awake() {
         if(Instance == null)
             Instance = this;
@@ -18,5 +19,9 @@ public class GameStateManager : MonoBehaviour
     }
     public void TransitionTo(string sceneName) {
         SceneManager.LoadScene(sceneName);
+    }
+
+    public void PauseGame() {
+        gamePaused = !gamePaused;
     }
 }

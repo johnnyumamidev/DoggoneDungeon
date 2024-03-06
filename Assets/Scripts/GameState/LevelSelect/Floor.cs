@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Biome : MonoBehaviour
+public class Floor : MonoBehaviour
 {
     [SerializeField] TileData tileData;
     [SerializeField] GameObject biomeMap;

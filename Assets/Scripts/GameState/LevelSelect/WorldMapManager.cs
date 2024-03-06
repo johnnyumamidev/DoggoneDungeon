@@ -10,9 +10,8 @@ public class WorldMapManager : MonoBehaviour
     public enum MapView { World, Biome }
     public MapView currentView;
     [SerializeField] GameObject world;
-    [SerializeField] List<GameObject> biomes = new List<GameObject>();
-    [SerializeField] int currentBiomeIndex = 0;
-    [SerializeField] float worldCamSize, biomeCamSize;
+    [SerializeField] List<GameObject> floors = new List<GameObject>();
+    [SerializeField] int currentFloor = 0;
     [SerializeField] List<Transform> levelNodesParents = new List<Transform>();
     [SerializeField] List<LevelNode> levelNodes = new List<LevelNode>();
     
@@ -24,6 +23,7 @@ public class WorldMapManager : MonoBehaviour
     }
 
     void Start() {
+        userInput.GetPlayer();
         foreach(Transform levelNodesParent in levelNodesParents) {
             foreach(Transform node in levelNodesParent) {
                 levelNodes.Add(node.GetComponent<LevelNode>());
@@ -54,18 +54,15 @@ public class WorldMapManager : MonoBehaviour
     void Update()
     {
         bool hide = true;
-        float camSize = worldCamSize;
-        Biome currentBiome = biomes[currentBiomeIndex].GetComponent<Biome>();
+        Floor currentBiome = floors[currentFloor].GetComponent<Floor>();
         if(currentView == MapView.Biome) {
             hide = false;
-            camSize = biomeCamSize;
         }
         else {
-            HandleMoveBetweenBiomes(userInput.GetMovementInput().x);
-            player.transform.position = biomes[currentBiomeIndex].transform.position;
+            HandleMoveBetweenFloors(userInput.GetMovementInput().x);
+            player.transform.position = floors[currentFloor].transform.position;
         }
         world.SetActive(hide);
-        Camera.main.orthographicSize = camSize;
 
         if(currentView == MapView.World && Input.GetKeyDown(KeyCode.Space))
             EnterBiome(currentBiome);
@@ -74,41 +71,41 @@ public class WorldMapManager : MonoBehaviour
         }
 
         if(currentView == MapView.World)
-            displayText.text = biomes[currentBiomeIndex].name;
+            displayText.text = floors[currentFloor].name;
         else {
             displayText.text = " ";
         }
     }
 
-    void HandleMoveBetweenBiomes(float value) {
+    void HandleMoveBetweenFloors(float value) {
         if(value < 0) {
             //go up levels
-            if(currentBiomeIndex > 0 )
-                currentBiomeIndex--;
+            if(currentFloor > 0 )
+                currentFloor--;
             else {
-                currentBiomeIndex = biomes.Count - 1;
+                currentFloor = floors.Count - 1;
             }
         }
         else if(value > 0){
-            if(currentBiomeIndex < biomes.Count - 1)
-                currentBiomeIndex++;
+            if(currentFloor < floors.Count - 1)
+                currentFloor++;
             else {
-                currentBiomeIndex = 0;
+                currentFloor = 0;
             }
         }
     }
-    void EnterBiome(Biome currentBiome) {
+    void EnterBiome(Floor currentFloor) {
         currentView = MapView.Biome;
-        currentBiome.OpenBiome(player);
+        currentFloor.OpenBiome(player);
     }
-    void ExitBiome(Biome currentBiome) {
+    void ExitBiome(Floor currentFloor) {
         currentView = MapView.World;
-        currentBiome.CloseBiome();
+        currentFloor.CloseBiome();
     }
-    public void UnlockBiome(GameObject biome) {
-        if(!biomes.Contains(biome)) {
-            biomes.Add(biome);
-            Biome _biome = biome.GetComponent<Biome>();
+    public void UnlockBiome(GameObject floor) {
+        if(!floors.Contains(floor)) {
+            floors.Add(floor);
+            Floor _biome = floor.GetComponent<Floor>();
             _biome.unlocked = true;
         }
     }

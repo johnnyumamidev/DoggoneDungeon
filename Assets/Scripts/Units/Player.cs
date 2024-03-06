@@ -59,7 +59,7 @@ public class Player : MonoBehaviour, IUnit, ITrigger
                 return false;
         }
         
-        if(tileData.ValidTile(target))
+        if(tileData && tileData.ValidTile(target))
             return true;
         return false;
     }
@@ -69,6 +69,9 @@ public class Player : MonoBehaviour, IUnit, ITrigger
     }
 
     void Update() {
+        if(tileData == null) 
+            return;
+
         if(!tileData.ValidTile(transform.position) && !onMovingPlatform) {
             CheckpointSystem checkpointSystem = FindObjectOfType<CheckpointSystem>();
             checkpointSystem?.PlacePlayerAtCheckpoint(transform);

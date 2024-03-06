@@ -4,12 +4,16 @@ using UnityEngine;
 using UnityEngine.Events;
 using System;
 
-public class TimeIncrementManager : MonoBehaviour
+public class PuzzleManager : MonoBehaviour
 {
     public float incrementLength = 0.5f;
     [SerializeField] List<Transform> tickers = new List<Transform>();
     void OnEnable() {
         StartCoroutine(IncrementTime());
+    }
+    void Start() {
+        UserInput userInput = FindObjectOfType<UserInput>();
+        userInput.GetPlayer();
     }
     IEnumerator IncrementTime() {
         float timer = 0;

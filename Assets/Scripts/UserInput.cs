@@ -2,70 +2,77 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using System;
 
 public class UserInput : MonoBehaviour
 {
-    IUnit[] units;
+    Player player;
     UnitCommandInvoker unitCommandInvoker;
     [SerializeField] LayerMask interactableLayer;
+    public event Action OnPause;
     void Start() {
-        units = FindObjectsOfType<MonoBehaviour>().OfType<IUnit>().ToArray();
         unitCommandInvoker = new UnitCommandInvoker();
     }
     void Update()
     {
-        HandleGameInput();
+        if(!GameStateManager.Instance.gamePaused)
+            HandleGameInput();
     }
-
+    public void GetPlayer() {
+        if(player == null)
+            player = FindObjectOfType<Player>();
+    }
     private void HandleGameInput()
     {
         Vector2 moveVector = GetMovementInput();
         bool undo = Input.GetKeyDown(KeyCode.Z);
         bool reset = Input.GetKeyDown(KeyCode.R);
+        bool confirm = Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.Space);
+        bool pause = Input.GetKeyDown(KeyCode.Escape);
 
         //movement input
         if (moveVector != Vector2.zero)
         {
-            foreach (IUnit unit in units)
-            {
-                Transform unitTransform = ((MonoBehaviour)unit).transform;
+            Transform unitTransform = player.transform;
 
-                ICommand interactCommand = new InteractCommand(unitTransform, moveVector, interactableLayer);
-                unitCommandInvoker.AddCommand(interactCommand);
+            ICommand interactCommand = new InteractCommand(unitTransform, moveVector, interactableLayer);
+            unitCommandInvoker.AddCommand(interactCommand);
 
-                ICommand pushCommand = new PushCommand(unitTransform, moveVector);
-                unitCommandInvoker.AddCommand(pushCommand);
+            ICommand pushCommand = new PushCommand(unitTransform, moveVector);
+            unitCommandInvoker.AddCommand(pushCommand);
 
-                ICommand moveCommand = new MoveUnitCommand(unit, unitTransform, moveVector);
-                unitCommandInvoker.AddCommand(moveCommand);
-            }
+            ICommand moveCommand = new MoveUnitCommand(player, unitTransform, moveVector);
+            unitCommandInvoker.AddCommand(moveCommand);
         }
         //undo input
         else if (undo)
         {
-            foreach (IUnit unit in units)
-            {
-                unitCommandInvoker.UndoCommand(3);
-            }
+            unitCommandInvoker.UndoCommand(3);
         }
         else if(reset) {
             //Reset level
         }
+        else if(confirm) {
+            
+        }
+        else if(pause) {
+            OnPause?.Invoke();
+        }
     }
 
     public Vector2 GetMovementInput() {
+        if(GameStateManager.Instance.gamePaused)
+            return Vector2.zero;
         bool h = Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D);
-        bool v = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S);
-        if(h)
-        {
-            float horizontal = Input.GetAxisRaw("Horizontal");
-            return new Vector2(horizontal, 0);
+        bool v = Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.W);
+
+        if(h) {
+            return new Vector2(Input.GetAxisRaw("Horizontal"), 0);
         }
-        else if(v)
-        {
-            float vertical = Input.GetAxisRaw("Vertical");
-            return new Vector2(0, vertical);
+        if(v) {
+            return new Vector2(0, Input.GetAxisRaw("Vertical"));
         }
+
         return Vector2.zero;
     }
 }
