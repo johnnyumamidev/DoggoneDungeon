@@ -7,6 +7,8 @@ public class PlayerProgress : MonoBehaviour
     public static PlayerProgress Instance { get; private set; }
     public int levelsCompleted = 0;
     public bool gameStarted = false;
+
+    public Vector2 playerPosition;
     void Start() {
         Instance = this;
     }
@@ -17,12 +19,17 @@ public class PlayerProgress : MonoBehaviour
     }
 
     public void ResetProgress() {
-        gameStarted = true;
+        gameStarted = false;
         levelsCompleted = 0;
     }
 
     public void GetProgress() {
         PlayerData data = SaveSystem.LoadFile();
         levelsCompleted = data.levelsCompleted;
+        gameStarted = data.gameStarted;
+    }
+
+    public void SavePlayerPosition(Vector2 position) {
+        playerPosition = position;
     }
 }

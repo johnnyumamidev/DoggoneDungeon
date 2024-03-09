@@ -15,8 +15,11 @@ EditorBuildSettings:
     path: Assets/Scenes/LevelSelect.unity
     guid: a060aa958f80d71409def314f2eaa294
   - enabled: 1
-    path: Assets/Scenes/LevelPrototypes/Level1.unity
+    path: Assets/Scenes/PuzzleLevel.unity
     guid: b59212a23f742a04eac8a31b21bdde26
+  - enabled: 1
+    path: Assets/Scenes/LevelPrototypes/Level1.unity
+    guid: 6b01506744a66d34395188f8beeb4234
   - enabled: 1
     path: Assets/Scenes/LevelPrototypes/Level2.unity
     guid: 4ca5e26c7b02ddf44a17cf1d7f2a9772

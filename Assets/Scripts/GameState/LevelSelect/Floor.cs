@@ -1,34 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Floor : MonoBehaviour
 {
     [SerializeField] TileData tileData;
-    [SerializeField] GameObject biomeMap;
+    [SerializeField] GameObject floorMap;
     [SerializeField] Transform start;
-    public bool unlocked = false;
-
-    [SerializeField] SpriteRenderer spriteRenderer;
-    Color biomeColor;
-    void Start() {
-        biomeColor = spriteRenderer.color;
+    public bool exitBlocked = true;
+    [SerializeField] TileBase catTile;
+    [SerializeField] Tilemap wallTilemap;
+    [SerializeField] Transform catGuardTransform;
+    void Awake() {
+        if(floorMap == null)
+            floorMap = gameObject;
     }
-    void Update() {
-        if(unlocked)
-            spriteRenderer.color = biomeColor;
+    public void EnterFloor(Player player) {
+        floorMap.SetActive(true);
+        player.SetTileData(tileData);
+
+        if(!PlayerProgress.Instance.gameStarted)
+            player.transform.position = start.position;
         else {
-            spriteRenderer.color = Color.red;
+            player.transform.position = PlayerProgress.Instance.playerPosition;
         }
     }
-    public void OpenBiome(Player player) {
-        Debug.Log("open " + name);
-        biomeMap.SetActive(true);
-        player.SetTileData(tileData);
-        player.transform.position = start.position;
-    }
 
-    public void CloseBiome() {
-        biomeMap.SetActive(false);
+    void Update() {
+        Vector3Int tilePosition = wallTilemap.WorldToCell(catGuardTransform.position);
+        if(exitBlocked) {
+            wallTilemap.SetTile(tilePosition, catTile);
+        }
+        else {
+            wallTilemap.SetTile(tilePosition, null);
+        }   
     }
 }

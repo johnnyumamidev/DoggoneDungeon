@@ -4,10 +4,14 @@ using UnityEngine;
 using System;
 public class LevelNode : MonoBehaviour
 {
+    public string levelName;
     public event Action<LevelNode, bool> OnPlayerDetected;
-    [SerializeField] bool unlocked = false;
+    public bool unlocked = false;
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Color lockedColor, unlockedColor;
+    void Start() { 
+        levelName = name;
+    }
     void Update()
     {
         if(DetectPlayer())
@@ -23,7 +27,7 @@ public class LevelNode : MonoBehaviour
 
     Player DetectPlayer()
     {
-        Collider2D collider = Physics2D.OverlapCircle(transform.position, 0.25f);
+        Collider2D collider = Physics2D.OverlapCircle((Vector2)transform.position + Vector2.down, 0.25f);
         if (collider)
         {
             Player player = collider.GetComponent<Player>();

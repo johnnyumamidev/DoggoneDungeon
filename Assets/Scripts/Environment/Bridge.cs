@@ -5,7 +5,6 @@ using UnityEngine.Tilemaps;
 
 public class Bridge : MonoBehaviour
 {
-    Transform[] conveyorNodeChildren;
     [SerializeField] TileBase bridgeTile;
     [SerializeField] Tilemap groundTilemap;
     bool active;

@@ -23,7 +23,6 @@ public class Key : MonoBehaviour, IPushable
 
     void OnTriggerEnter2D(Collider2D collider) {
         if(collider.TryGetComponent(out CageBlock cage)) {
-            Debug.Log("unlock cage, save doggy!");
             GameStateManager.Instance.TransitionTo("LevelSelect");
             PlayerProgress.Instance.OnLevelCompleted();
         }

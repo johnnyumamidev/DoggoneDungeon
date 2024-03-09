@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using System;
 
 public class PuzzleManager : MonoBehaviour
 {
@@ -15,6 +13,7 @@ public class PuzzleManager : MonoBehaviour
         UserInput userInput = FindObjectOfType<UserInput>();
         userInput.GetPlayer();
     }
+    #region TimeIncrementation
     IEnumerator IncrementTime() {
         float timer = 0;
         while(timer < incrementLength) {
@@ -30,4 +29,5 @@ public class PuzzleManager : MonoBehaviour
             ticker.GetComponent<ITicker>().Tick();
         }
     }
+    #endregion
 }
