@@ -17,6 +17,8 @@ public class UserInput : MonoBehaviour
     {
         if(!GameStateManager.Instance.gamePaused)
             HandleGameInput();
+        
+        HandlePauseInput();
     }
     public void GetPlayer() {
         if(player == null)
@@ -28,7 +30,6 @@ public class UserInput : MonoBehaviour
         bool undo = Input.GetKeyDown(KeyCode.Z);
         bool reset = Input.GetKeyDown(KeyCode.R);
         bool confirm = Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.Space);
-        bool pause = Input.GetKeyDown(KeyCode.Escape);
 
         //movement input
         if (moveVector != Vector2.zero)
@@ -55,9 +56,6 @@ public class UserInput : MonoBehaviour
         else if(confirm) {
             
         }
-        else if(pause) {
-            OnPause?.Invoke();
-        }
     }
 
     public Vector2 GetMovementInput() {
@@ -74,5 +72,11 @@ public class UserInput : MonoBehaviour
         }
 
         return Vector2.zero;
+    }
+    void HandlePauseInput() {
+        bool pause = Input.GetKeyDown(KeyCode.Escape);
+        if(pause) {
+            OnPause?.Invoke();
+        }
     }
 }

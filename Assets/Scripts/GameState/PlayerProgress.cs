@@ -12,8 +12,10 @@ public class PlayerProgress : MonoBehaviour
     void Start() {
         Instance = this;
     }
-    public void OnLevelCompleted() {
+    public void OnLevelEntered() {
         gameStarted = true;
+    }
+    public void OnLevelCompleted() {
         levelsCompleted++;
         SaveSystem.SaveProgress(this);
     }

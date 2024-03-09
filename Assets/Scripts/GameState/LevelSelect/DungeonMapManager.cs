@@ -8,7 +8,7 @@ public class DungeonMapManager : MonoBehaviour
     [SerializeField] Player player;
     [SerializeField] UserInput userInput;
     [SerializeField] List<Floor> floors = new List<Floor>();
-    [SerializeField] int currentFloor = 0;
+    [SerializeField] int currentFloorIndex = 0;
     [SerializeField] List<Transform> levelNodesParents = new List<Transform>();
     [SerializeField] List<LevelNode> levelNodes = new List<LevelNode>();
     void Awake() {
@@ -35,7 +35,7 @@ public class DungeonMapManager : MonoBehaviour
             levelNodes[i].UnlockLevel();
         }
 
-        floors[currentFloor].EnterFloor(player);
+        floors[currentFloorIndex].EnterFloor(player);
     }
     void OnDisable() {
         foreach(LevelNode node in levelNodes) {
@@ -50,12 +50,13 @@ public class DungeonMapManager : MonoBehaviour
             string scene = "PuzzleLevel";
             GameStateManager.Instance.TransitionTo(scene);
             GameStateManager.Instance.SetCurrentLevel(levelNode);
+            PlayerProgress.Instance.OnLevelEntered();
         }
     }
 
     void Update()
     {
-        Floor floor = floors[currentFloor]; 
+        Floor floor = floors[currentFloorIndex]; 
         if(LevelsCleared() >= levelNodes.Count)
             floor.exitBlocked = false;
         else {

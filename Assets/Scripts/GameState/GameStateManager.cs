@@ -19,10 +19,10 @@ public class GameStateManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
     public void TransitionTo(string sceneName) {
+        gamePaused = false;
         if(sceneName == "PuzzleLevel") {
             PlayerProgress.Instance.SavePlayerPosition(FindObjectOfType<Player>().transform.position);
         }
-       
         SceneManager.LoadScene(sceneName);
     }
     public void SetCurrentLevel(LevelNode _levelNode) {
