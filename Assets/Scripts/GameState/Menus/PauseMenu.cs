@@ -17,7 +17,6 @@ public class PauseMenu : MonoBehaviour
         transparency = GetComponent<Image>();
         userInput = FindObjectOfType<UserInput>();
         if(userInput) {
-            Debug.Log(name + "subscribed");
             userInput.OnPause += EnableMenu;
         }
         pauseMenu.SetActive(false);   
@@ -25,7 +24,6 @@ public class PauseMenu : MonoBehaviour
     }
     void OnDisable() {
         if(userInput) {
-            Debug.Log(name + "disabled");
             userInput.OnPause -= EnableMenu;
         }
     }
