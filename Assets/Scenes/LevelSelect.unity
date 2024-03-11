@@ -864,7 +864,7 @@ MonoBehaviour:
   m_Follow: {fileID: 491159371}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 4.21375
+    OrthographicSize: 4.21875
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -994,7 +994,6 @@ MonoBehaviour:
   tileData: {fileID: 1401676406}
   floorMap: {fileID: 759180127}
   start: {fileID: 1491886833}
-  exitBlocked: 1
   catTile: {fileID: 11400000, guid: 28d9050b735f6a14a86eac4be6a7aacc, type: 2}
   wallTilemap: {fileID: 2058203383}
   catGuardTransform: {fileID: 1843189253}
@@ -2483,7 +2482,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.21375
+  orthographic size: 4.21875
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -5105,7 +5104,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2053122801
 Transform:
   m_ObjectHideFlags: 0
@@ -5141,7 +5140,6 @@ MonoBehaviour:
   tileData: {fileID: 1397025338}
   floorMap: {fileID: 2053122800}
   start: {fileID: 154989492}
-  exitBlocked: 1
   catTile: {fileID: 11400000, guid: 28d9050b735f6a14a86eac4be6a7aacc, type: 2}
   wallTilemap: {fileID: 1299812821}
   catGuardTransform: {fileID: 426389195}

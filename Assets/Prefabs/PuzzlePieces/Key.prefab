@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 413c20326a7b908468eae4eeb1101184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileData: {fileID: 0}
 --- !u!50 &334154972
 Rigidbody2D:
   serializedVersion: 4
@@ -164,8 +165,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -304865933
+  m_SortingLayer: 2
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: eabcecf134a25704cb5f3fe286d13e15, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

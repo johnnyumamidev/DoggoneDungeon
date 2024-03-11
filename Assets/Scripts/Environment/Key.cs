@@ -22,11 +22,4 @@ public class Key : MonoBehaviour, IPushable
         if(tileData.ValidTile(transform.position + (Vector3)vector))
             transform.position += (Vector3)vector;
     }
-
-    void OnTriggerEnter2D(Collider2D collider) {
-        if(collider.TryGetComponent(out CageBlock cage)) {
-            GameStateManager.Instance.TransitionTo("LevelSelect");
-            OnCageUnlocked?.Invoke();
-        }
-    }
 }
