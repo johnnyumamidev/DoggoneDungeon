@@ -1260,7 +1260,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelsCompleted: 0
   gameStarted: 0
+  currentFloorIndex: 0
   playerPosition: {x: 0, y: 0}
+  completedPuzzles: []
 --- !u!4 &930336657
 Transform:
   m_ObjectHideFlags: 0
@@ -2026,6 +2028,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gamePaused: 0
+  currentLevelSceneName: 
 --- !u!4 &1381787636
 Transform:
   m_ObjectHideFlags: 0

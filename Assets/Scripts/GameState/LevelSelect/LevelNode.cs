@@ -9,7 +9,7 @@ public class LevelNode : MonoBehaviour
     public bool unlocked = false;
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Color lockedColor, unlockedColor;
-    void Start() { 
+    void Awake() { 
         levelName = name;
     }
     void Update()

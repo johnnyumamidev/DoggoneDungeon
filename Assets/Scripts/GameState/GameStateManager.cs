@@ -8,6 +8,7 @@ public class GameStateManager : MonoBehaviour
     public static GameStateManager Instance { get; private set; }
     public bool gamePaused = false;
     public LevelNode CurrentLevel { get; private set; }
+    public string currentLevelSceneName;
     void Awake() {
         if(Instance == null)
             Instance = this;
@@ -27,6 +28,7 @@ public class GameStateManager : MonoBehaviour
     }
     public void SetCurrentLevel(LevelNode _levelNode) {
         CurrentLevel = _levelNode;
+        currentLevelSceneName = _levelNode.levelName;
     }
     public void PauseGame() {
         gamePaused = !gamePaused;

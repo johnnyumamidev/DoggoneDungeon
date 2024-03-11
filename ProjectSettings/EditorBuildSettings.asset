@@ -18,15 +18,15 @@ EditorBuildSettings:
     path: Assets/Scenes/PuzzleLevel.unity
     guid: b59212a23f742a04eac8a31b21bdde26
   - enabled: 1
-    path: Assets/Scenes/LevelPrototypes/Level1.unity
-    guid: 6b01506744a66d34395188f8beeb4234
+    path: Assets/Scenes/Levels/Floor1/Level1-1.unity
+    guid: ef7648813ccd4af4aa43962149fa0567
   - enabled: 1
-    path: Assets/Scenes/LevelPrototypes/Level2.unity
-    guid: 4ca5e26c7b02ddf44a17cf1d7f2a9772
+    path: Assets/Scenes/Levels/Floor1/Level1-2.unity
+    guid: 03c56636fda3f4449ba8f0ef3bdc4d31
   - enabled: 1
-    path: Assets/Scenes/LevelPrototypes/Level3.unity
-    guid: cbe97651bcaefa44182dc2d15b449254
+    path: Assets/Scenes/Levels/Floor1/Level1-3.unity
+    guid: a551d16c0ac0e5347832e81f4af52982
   - enabled: 1
-    path: Assets/Scenes/LevelPrototypes/Level4.unity
-    guid: f50a0327af8a2344bb1f5382e4a5a960
+    path: Assets/Scenes/Levels/Floor1/Level1-4.unity
+    guid: 4907db2c1de6f3d4dbcc0f180f76e581
   m_configObjects: {}

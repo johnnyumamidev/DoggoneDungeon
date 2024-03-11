@@ -11,7 +11,6 @@ public class MainMenu : MonoBehaviour
     public Button continueButton;
     public Button newGamebutton;
     [SerializeField] Color disabledColor, enabledColor;
-
     void Start() {
         newGameWarning.SetActive(false);
         PlayerData data = SaveSystem.LoadFile();
@@ -24,7 +23,6 @@ public class MainMenu : MonoBehaviour
             continueText.color = enabledColor;
         }
     }
-    
     public void CheckForSaveData() {
         PlayerData data = SaveSystem.LoadFile(); 
         if(data != null && data.gameStarted) {
