@@ -129,6 +129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a1ae2e6490d2334093dfd950bbd97ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cageTile: {fileID: 0}
+  cageTile: {fileID: 11400000, guid: 1943bdbd098602d42bf5182f7b754178, type: 2}
   wallsTilemap: {fileID: 0}
   spriteRenderer: {fileID: 26821044481696761}

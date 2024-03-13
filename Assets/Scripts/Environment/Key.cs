@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class Key : MonoBehaviour, IPushable
 {
     [SerializeField] TileData tileData;
-    public event Action OnCageUnlocked;
     void Start() {
         if(tileData == null) {
             tileData = FindObjectOfType<TileData>();

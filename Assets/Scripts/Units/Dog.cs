@@ -1,14 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class Dog : MonoBehaviour
 {
-    void Update() {
-        Collider2D playerCheck = Physics2D.OverlapCircle(transform.position, 0.25f);
-        if(playerCheck && playerCheck.TryGetComponent(out Player player)) {
-            GameStateManager.Instance.TransitionTo("LevelSelect");
-        }
+    public void FollowPlayer(Transform playerTransform, Vector2 moveDirection) {
+        Vector3 followTarget = playerTransform.position - (Vector3)moveDirection;
+        transform.position = followTarget;
     }
 }

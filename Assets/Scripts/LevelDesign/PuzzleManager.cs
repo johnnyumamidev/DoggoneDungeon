@@ -7,7 +7,6 @@ public class PuzzleManager : MonoBehaviour
     public float incrementLength = 0.5f;
     [SerializeField] List<Transform> tickers = new List<Transform>();
     TileData tileData;
-    Lock _lock;
     void OnEnable() {
         StartCoroutine(IncrementTime());
     }

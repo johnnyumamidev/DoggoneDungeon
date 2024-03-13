@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class Player : MonoBehaviour, IUnit, ITrigger
@@ -7,6 +8,7 @@ public class Player : MonoBehaviour, IUnit, ITrigger
     [SerializeField] TileData tileData;
     [SerializeField] LayerMask obstacleLayer;
     bool onMovingPlatform = false;
+    public Dog dogFollower;
     public void Move(Vector2 input, bool undo)
     {
         Vector3 position = transform.position + (Vector3)input;
@@ -34,6 +36,10 @@ public class Player : MonoBehaviour, IUnit, ITrigger
             }
             transform.position = roundedPosition;
         } 
+
+        if(dogFollower) {
+            dogFollower.FollowPlayer(transform, input);
+        }
     }
 
     public bool CanMove(Vector3 target, Collider2D obstacle) {
@@ -57,6 +63,11 @@ public class Player : MonoBehaviour, IUnit, ITrigger
 
             if(colliderCheck.TryGetComponent(out IInteractable interactable)) 
                 return false;
+            
+            if(colliderCheck.TryGetComponent(out Dog dog)) {
+                dogFollower = dog;
+                return false;
+            }
         }
         
         if(tileData && tileData.ValidTile(target))
@@ -76,5 +87,10 @@ public class Player : MonoBehaviour, IUnit, ITrigger
             CheckpointSystem checkpointSystem = FindObjectOfType<CheckpointSystem>();
             checkpointSystem?.PlacePlayerAtCheckpoint(transform);
         }
+    }
+
+    public void CommandDogToSit() {
+        Debug.Log("sit");
+        dogFollower = null;
     }
 }

@@ -30,7 +30,7 @@ public class UserInput : MonoBehaviour
         bool undo = Input.GetKeyDown(KeyCode.Z);
         bool reset = Input.GetKeyDown(KeyCode.R);
         bool confirm = Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.Space);
-
+        bool dogSit = Input.GetKeyDown(KeyCode.E);
         //movement input
         if (moveVector != Vector2.zero)
         {
@@ -55,6 +55,13 @@ public class UserInput : MonoBehaviour
         }
         else if(confirm) {
             
+        }
+        else if(dogSit) {
+            if(!player.dogFollower)
+                return; 
+                
+            ICommand dogSitCommand = new DogSitCommand(player);
+            unitCommandInvoker.AddCommand(dogSitCommand);
         }
     }
 
