@@ -21,7 +21,7 @@ public class Lock : MonoBehaviour
         ControlCage();
     }
     void CheckForKey() {
-        Collider2D keyCheck = Physics2D.OverlapCircle((Vector2)transform.position, 0.25f);
+        Collider2D keyCheck = Physics2D.OverlapCircle((Vector2)transform.position + Vector2.down, 0.25f);
         if(keyCheck && keyCheck.TryGetComponent(out Key key)) {
             SavePuzzleProgress();
             locked = false;

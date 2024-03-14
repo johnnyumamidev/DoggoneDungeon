@@ -65,7 +65,8 @@ public class Player : MonoBehaviour, IUnit, ITrigger
                 return false;
             
             if(colliderCheck.TryGetComponent(out Dog dog)) {
-                dogFollower = dog;
+                if(!dogFollower)
+                    dogFollower = dog;
                 return false;
             }
         }

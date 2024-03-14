@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CageBlock : MonoBehaviour, IPushable, ITrigger
+public class Box : MonoBehaviour, IPushable, ITrigger
 {
     [SerializeField] TileData tileData;
     [SerializeField] LayerMask obstacle;
