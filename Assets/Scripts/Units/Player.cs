@@ -17,9 +17,10 @@ public class Player : MonoBehaviour, IUnit, ITrigger
         
         if(CanMove(position, obstacle)) {
             if(obstacle) {
+                Debug.Log(obstacle);
                 IPushable pushable = obstacle.GetComponent<IPushable>();
                 if(pushable == null) {
-                    //do nothing   
+                    return;
                 }
                 else {
                     Vector3 tileInFrontOfPushable = position + (Vector3)input; 
@@ -65,9 +66,13 @@ public class Player : MonoBehaviour, IUnit, ITrigger
                 return false;
             
             if(colliderCheck.TryGetComponent(out Dog dog)) {
-                if(!dogFollower)
+                if(!dogFollower) {
                     dogFollower = dog;
-                return false;
+                    return false;
+                }
+                else {
+                    return true;
+                }
             }
         }
         

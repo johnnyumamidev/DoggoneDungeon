@@ -13,7 +13,6 @@ public class TimedSwitch : MonoBehaviour, IInteractable, ITicker
     float angle;
     void Update() {
         spriteRenderer.transform.rotation = Quaternion.Euler(0,0,angle);
-        onInteracted?.Invoke(active);
     }
     public void Tick() {
         if(!active) return;
@@ -30,6 +29,7 @@ public class TimedSwitch : MonoBehaviour, IInteractable, ITicker
     public void Interact()
     {
         active = true;
+        onInteracted?.Invoke(active);
         angle = 90;
     }
 

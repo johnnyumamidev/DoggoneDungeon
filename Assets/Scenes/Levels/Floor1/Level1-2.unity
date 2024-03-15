@@ -1554,13 +1554,13 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileSpriteIndex: 4294967295
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741826
-  - first: {x: 0, y: -4, z: 0}
+  - first: {x: 1, y: -4, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 0
@@ -1570,7 +1570,27 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741826
-  - first: {x: -4, y: -1, z: 0}
+  - first: {x: 2, y: -4, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741826
+  - first: {x: 3, y: -4, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741826
+  - first: {x: 4, y: -4, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 0
@@ -1582,13 +1602,15 @@ Tilemap:
       m_AllTileFlags: 1073741826
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 5
+  - m_RefCount: 7
     m_Data: {fileID: 11400000, guid: 26516ed86ad7d5844a5ef3c4e53226a8, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 2
+  - m_RefCount: 3
     m_Data: {fileID: -2041963681, guid: a2236606637ae924ca7634199bea0970, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileMatrixArray:
-  - m_RefCount: 5
+  - m_RefCount: 7
     m_Data:
       e00: 1
       e01: 0
@@ -1607,13 +1629,13 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 5
+  - m_RefCount: 7
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: -4, y: -4, z: 0}
-  m_Size: {x: 5, y: 4, z: 1}
+  m_Origin: {x: -3, y: -4, z: 0}
+  m_Size: {x: 8, y: 4, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -1774,7 +1796,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1000330161684915853, guid: efb4338a9e58db04aa0217e6aad52bbf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.00002
+      value: 2.00004
       objectReference: {fileID: 0}
     - target: {fileID: 1000330161684915853, guid: efb4338a9e58db04aa0217e6aad52bbf, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1819,10 +1841,14 @@ PrefabInstance:
     - target: {fileID: 1000330161684915855, guid: efb4338a9e58db04aa0217e6aad52bbf, type: 3}
       propertyPath: testEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1202311083}
+      objectReference: {fileID: 2023105118}
     - target: {fileID: 1000330161684915855, guid: efb4338a9e58db04aa0217e6aad52bbf, type: 3}
       propertyPath: testEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ControlDoors
+      value: ControlLock
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000330161684915855, guid: efb4338a9e58db04aa0217e6aad52bbf, type: 3}
+      propertyPath: testEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Lock, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efb4338a9e58db04aa0217e6aad52bbf, type: 3}
@@ -3041,3 +3067,83 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 269f5759a05bbf740a519d149880e20a, type: 3}
+--- !u!114 &2023105118 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1767295269506504064, guid: 269f5759a05bbf740a519d149880e20a, type: 3}
+  m_PrefabInstance: {fileID: 2023105117}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a1ae2e6490d2334093dfd950bbd97ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &2142815787
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1000330161684915853, guid: efb4338a9e58db04aa0217e6aad52bbf, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000330161684915853, guid: efb4338a9e58db04aa0217e6aad52bbf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000330161684915853, guid: efb4338a9e58db04aa0217e6aad52bbf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.00006
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000330161684915853, guid: efb4338a9e58db04aa0217e6aad52bbf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000330161684915853, guid: efb4338a9e58db04aa0217e6aad52bbf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000330161684915853, guid: efb4338a9e58db04aa0217e6aad52bbf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000330161684915853, guid: efb4338a9e58db04aa0217e6aad52bbf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000330161684915853, guid: efb4338a9e58db04aa0217e6aad52bbf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000330161684915853, guid: efb4338a9e58db04aa0217e6aad52bbf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000330161684915853, guid: efb4338a9e58db04aa0217e6aad52bbf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000330161684915853, guid: efb4338a9e58db04aa0217e6aad52bbf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000330161684915854, guid: efb4338a9e58db04aa0217e6aad52bbf, type: 3}
+      propertyPath: m_Name
+      value: PressurePlate (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000330161684915855, guid: efb4338a9e58db04aa0217e6aad52bbf, type: 3}
+      propertyPath: testEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1202311083}
+    - target: {fileID: 1000330161684915855, guid: efb4338a9e58db04aa0217e6aad52bbf, type: 3}
+      propertyPath: testEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ControlDoors
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000330161684915855, guid: efb4338a9e58db04aa0217e6aad52bbf, type: 3}
+      propertyPath: testEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Door, Assembly-CSharp
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: efb4338a9e58db04aa0217e6aad52bbf, type: 3}

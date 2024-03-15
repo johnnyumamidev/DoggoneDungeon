@@ -11,19 +11,28 @@ public class PressureTrigger : MonoBehaviour
     [SerializeField] Color disabledColor, enabledColor;
     void Update()
     {
-        triggered = GetColliders();
-        
-        buttonRenderer.color = enabledColor;
-        if(!triggered) 
-            buttonRenderer.color = disabledColor;
-
-        testEvent?.Invoke(triggered);
+        if(!triggered) {
+            Collider2D triggerCheck = Physics2D.OverlapCircle(transform.position, 0.25f);
+            if (triggerCheck && triggerCheck.TryGetComponent(out ITrigger trigger)) {
+                triggered = true;
+                Debug.Log("trigger");
+                testEvent?.Invoke(true);
+            }
+        }
+        else {
+            Collider2D triggerCheck = Physics2D.OverlapCircle(transform.position, 0.25f);
+            if(!triggerCheck) {
+                triggered = false;
+                testEvent?.Invoke(false);
+            }
+        }
+        HandleColor();
     }
 
-    bool GetColliders() {
-        Collider2D collider = Physics2D.OverlapCircle(transform.position, 0.25f);
-        if(collider && collider.TryGetComponent(out ITrigger trigger))
-            return true;
-        return false;
+    private void HandleColor()
+    {
+        buttonRenderer.color = enabledColor;
+        if (!triggered)
+            buttonRenderer.color = disabledColor;
     }
 }

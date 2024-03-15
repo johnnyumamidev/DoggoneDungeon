@@ -2,22 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Key : MonoBehaviour, IPushable
+public class Key : MonoBehaviour, IInteractable
 {
-    [SerializeField] TileData tileData;
-    void Start() {
-        if(tileData == null) {
-            tileData = FindObjectOfType<TileData>();
-        }
-    }
-    public bool NoObstacles(Vector2 vector)
+    public void Interact()
     {
-        throw new System.NotImplementedException();
+        GameStateManager.Instance.TransitionTo("LevelSelect");    
+        PlayerProgress.Instance.OnLevelCompleted(GameStateManager.Instance.currentLevelSceneName);
     }
 
-    public void Push(Vector2 vector)
+    public void Cancel()
     {
-        if(tileData.ValidTile(transform.position + (Vector3)vector))
-            transform.position += (Vector3)vector;
+        throw new System.NotImplementedException();
     }
 }

@@ -40,4 +40,8 @@ public class Lock : MonoBehaviour
     void SavePuzzleProgress() {
         PlayerProgress.Instance.OnLevelCompleted(GameStateManager.Instance.currentLevelSceneName);
     }
+
+    public void ControlLock(bool a) {
+        locked = !a;
+    }
 }
