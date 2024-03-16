@@ -3,27 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PressureTrigger : MonoBehaviour
+public class PressureTrigger : MonoBehaviour, ISwitch
 {
-    public UnityEvent<bool> testEvent;
+    public UnityEvent<ISwitch> testEvent;
     bool triggered = false;
     [SerializeField] SpriteRenderer buttonRenderer;
     [SerializeField] Color disabledColor, enabledColor;
     void Update()
     {
+        Collider2D triggerCheck = Physics2D.OverlapCircle(transform.position, 0.25f);
+
         if(!triggered) {
-            Collider2D triggerCheck = Physics2D.OverlapCircle(transform.position, 0.25f);
             if (triggerCheck && triggerCheck.TryGetComponent(out ITrigger trigger)) {
                 triggered = true;
-                Debug.Log("trigger");
-                testEvent?.Invoke(true);
+                testEvent?.Invoke(this);
             }
         }
         else {
-            Collider2D triggerCheck = Physics2D.OverlapCircle(transform.position, 0.25f);
             if(!triggerCheck) {
                 triggered = false;
-                testEvent?.Invoke(false);
+                testEvent?.Invoke(this);
             }
         }
         HandleColor();
@@ -34,5 +33,10 @@ public class PressureTrigger : MonoBehaviour
         buttonRenderer.color = enabledColor;
         if (!triggered)
             buttonRenderer.color = disabledColor;
+    }
+
+    public bool IsTriggered()
+    {
+        return triggered;
     }
 }

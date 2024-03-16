@@ -4,15 +4,31 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    bool open = false;
+    [SerializeField] List<ISwitch> switches = new List<ISwitch>();
+    bool closed = true;
     Collider2D doorCollider;
     [SerializeField] SpriteRenderer spriteRenderer;
     void Awake() {
         doorCollider = GetComponent<Collider2D>();
     }
-    public void ControlDoors(bool b) {
-        open = b;
-        doorCollider.enabled = !b;
-        spriteRenderer.enabled = !b;
+
+    void Update() {
+        doorCollider.enabled = closed;
+        spriteRenderer.enabled = closed;
+    }
+    public void ControlDoors(ISwitch _switch) {
+        if(!switches.Contains(_switch)) {
+            switches.Add(_switch);
+        }
+
+        for(int i = 0; i < switches.Count; i++) {
+            if(switches[i].IsTriggered()) {
+                closed = false;
+                break;
+            }
+            else {
+                closed = true;
+            }
+        }
     }
 }

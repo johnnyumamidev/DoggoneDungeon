@@ -37,7 +37,6 @@ public class Box : MonoBehaviour, IPushable, ITrigger
 
     void Update() {
         if(!tileData.ValidTile(transform.position) && !OnMovingPlatform(transform.position)) {
-            Debug.Log("cage dropped!! GAME OVER!! START OVER DUMMY!!!");
         }
     }
 }
