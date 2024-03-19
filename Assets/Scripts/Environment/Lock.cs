@@ -7,7 +7,6 @@ public class Lock : MonoBehaviour
     [SerializeField] TileBase cageTile;
     [SerializeField] Tilemap wallsTilemap;
     public bool locked = true;
-    [SerializeField] SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +33,6 @@ public class Lock : MonoBehaviour
             wallsTilemap.SetTile(tilePosition, cageTile);
         else {
             wallsTilemap.SetTile(tilePosition, null);
-            spriteRenderer.enabled = false;
         }
     }
     void SavePuzzleProgress() {

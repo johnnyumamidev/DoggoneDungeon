@@ -6,32 +6,34 @@ using UnityEngine.Events;
 public class Battery : MonoBehaviour
 {
     public UnityEvent<bool> emitPower;
-    [SerializeField] Laser laser;
+    [SerializeField] Laser[] lasers;
     public enum PowerType { Normal, Reversed };
     public PowerType powerType;
-    bool reversePower = false;
     bool powered = false;
-    // Start is called before the first frame update
+    public bool hitByLaser = false;
     void Start()
     {
-        
+        lasers = FindObjectsOfType<Laser>();
     }
-
     // Update is called once per frame
     void Update()
     {
-        if(laser.LaserRay() == transform) {
-            powered = true;
-            reversePower = false;
-        }
-        else {
-            powered = false;
-            reversePower = true;
-        }
+        powered = CheckForPower();
+
         if(powerType == PowerType.Normal)
             emitPower?.Invoke(powered);
         else {
-            emitPower?.Invoke(reversePower);
+            emitPower?.Invoke(!powered);
         }
+    }
+
+    bool CheckForPower() {
+        foreach(Laser laser in lasers) {
+            if(laser.LaserRay(out Vector2 laserDirection) == transform) {
+                return true;
+            }
+        }
+
+        return false | hitByLaser;
     }
 }

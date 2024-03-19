@@ -15,16 +15,17 @@ public class Laser : MonoBehaviour, IInteractable
     [SerializeField] Transform laserStart;
     [SerializeField] bool active = false;
     float laserLength = 5;
-    public Transform LaserRay() {
-        if(!active) return null;
-        RaycastHit2D hit = Physics2D.Raycast(laserStart.position, directions[rotationIndex] * laserLength);
-        if(hit && hit.transform.TryGetComponent(out Battery battery))
+    [SerializeField] RaycastHit2D laserHit;
+    public Transform LaserRay(out Vector2 direction) {
+        direction = directions[rotationIndex];
+        if(!active) 
+            return null;
+        RaycastHit2D hit = Physics2D.Raycast(laserStart.position, direction);
+        if(hit) {
+            laserHit = hit;
             return hit.transform;
+        }
         return null;
-    }
-    void OnDrawGizmos() {
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(laserStart.position, directions[rotationIndex] * laserLength);
     }
 
     public void Activate(bool b) {
@@ -32,13 +33,18 @@ public class Laser : MonoBehaviour, IInteractable
     }
     void Update() {
         HandleRotation();
+
+        Vector2 laserVector = Vector2.down * 10;
+        if(laserHit) {
+            laserVector = laserHit.point - (Vector2)laserStart.position;         
+        }
+        laserStart.localScale = new Vector3(1, laserVector.magnitude, 1);
     }
     void HandleRotation() {
         transform.rotation = Quaternion.Euler(0,0,rotationAngles[rotationIndex]);
     }
     public void Interact()
     {
-        Debug.Log(name);
         previousIndex = rotationIndex;
         if(rotationIndex < rotationAngles.Count-1) {
             rotationIndex++;
