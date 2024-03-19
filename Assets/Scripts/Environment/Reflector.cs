@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class Reflector : MonoBehaviour, IPushable, IInteractable
 {
@@ -10,7 +9,9 @@ public class Reflector : MonoBehaviour, IPushable, IInteractable
     Vector2 reflectedLaserVector;
     [SerializeField] List<Transform> reflectionPoints = new List<Transform>();
     bool reflect = false;
+    [SerializeField] Transform laserTransform;
     Battery lastBatteryHit;
+    Vector2 laserLengthStart, laserLengthEnd = Vector2.zero;
     public bool NoObstacles(Vector2 vector)
     {
         throw new System.NotImplementedException();
@@ -36,13 +37,14 @@ public class Reflector : MonoBehaviour, IPushable, IInteractable
             Vector2 reflectionDirection = reflectionPoint.position - transform.position;
             int receiveLaserDot = Mathf.RoundToInt(Vector2.Dot(-laserDirection, reflectionDirection)); 
             int reflectLaserDot = Mathf.RoundToInt(Vector2.Dot(reflectionDirection, laserDirection));
-            if(receiveLaserDot == 1) {
-                reflect = true;
-            }
-
+            
             if(reflectLaserDot == 0) {
                 reflectedLaserVector = reflectionDirection;
+                laserLengthEnd = laserLengthStart + (reflectionDirection * 20); 
+
                 reflectionStartPos = reflectionPoint.position;
+
+                laserTransform.position = laserLengthStart;
             }
         }
 
@@ -59,9 +61,9 @@ public class Reflector : MonoBehaviour, IPushable, IInteractable
         for(int i = 0; i < hitsInReflectionPath.Length; i++) {
             RaycastHit2D hit = hitsInReflectionPath[i];
             Transform t = hit.transform;
-           
+            laserLengthEnd = t.position;
+
             if(t.TryGetComponent(out Reflector reflector)) {
-                Debug.Log(name + " hit: " + reflector);
                 reflector.laserDirection = reflectedLaserVector;
                 reflector.Reflect();
 
@@ -73,12 +75,12 @@ public class Reflector : MonoBehaviour, IPushable, IInteractable
             }
 
             if(t.TryGetComponent(out Battery battery)) {
-                Debug.Log(name + " hit: " + battery);
                 lastBatteryHit = battery;
                 battery.hitByLaser = true;
                 break;
             }
         }
+        
     }
 
     void Start()
@@ -87,19 +89,19 @@ public class Reflector : MonoBehaviour, IPushable, IInteractable
     }
 
     void Update()
-    {
-        reflect = false;
+    {        
+        laserLengthStart = transform.position;
+        laserLengthEnd = transform.position;
         foreach(Laser laser in lasers) {
             Transform laserHit = laser.LaserRay(out laserDirection); 
             if(laserHit == transform) {
                 Reflect();
             }
         }   
+        Vector2 laserLength = laserLengthEnd - laserLengthStart;
+        laserTransform.localScale = new Vector3(laserLength.magnitude, 1, 1);
     }
-
     void OnDrawGizmos() {
-        if(reflect)
-            Gizmos.DrawRay(transform.position, reflectedLaserVector * 20);
+        Gizmos.DrawRay(transform.position, reflectedLaserVector * 20);
     }
-
 }
