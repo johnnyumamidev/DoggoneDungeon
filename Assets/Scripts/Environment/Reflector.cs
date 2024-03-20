@@ -5,13 +5,13 @@ using UnityEngine;
 public class Reflector : MonoBehaviour, IPushable, IInteractable
 {
     [SerializeField] Laser[] lasers;
-    public Vector2 laserDirection;
     Vector2 reflectedLaserVector;
     [SerializeField] List<Transform> reflectionPoints = new List<Transform>();
-    bool reflect = false;
-    [SerializeField] Transform laserTransform;
-    Battery lastBatteryHit;
+    [SerializeField] Transform horizLaser, vertLaser;
+    [SerializeField] Battery lastBatteryHit;
+    [SerializeField] Reflector lastReflectorHit;
     Vector2 laserLengthStart, laserLengthEnd = Vector2.zero;
+    public bool reflecting = false;
     public bool NoObstacles(Vector2 vector)
     {
         throw new System.NotImplementedException();
@@ -31,20 +31,26 @@ public class Reflector : MonoBehaviour, IPushable, IInteractable
         throw new System.NotImplementedException();
     }
     
-    public void Reflect() {
+    public void ReflectLaser(Vector2 incomingVector) {
         Vector2 reflectionStartPos = Vector2.zero;
+        
         foreach(Transform reflectionPoint in reflectionPoints) {
             Vector2 reflectionDirection = reflectionPoint.position - transform.position;
-            int receiveLaserDot = Mathf.RoundToInt(Vector2.Dot(-laserDirection, reflectionDirection)); 
-            int reflectLaserDot = Mathf.RoundToInt(Vector2.Dot(reflectionDirection, laserDirection));
-            
+            int reflectLaserDot = Mathf.RoundToInt(Vector2.Dot(reflectionDirection, incomingVector));
             if(reflectLaserDot == 0) {
                 reflectedLaserVector = reflectionDirection;
-                laserLengthEnd = laserLengthStart + (reflectionDirection * 20); 
+                laserLengthEnd = laserLengthStart + (reflectedLaserVector * 20); 
 
                 reflectionStartPos = reflectionPoint.position;
 
-                laserTransform.position = laserLengthStart;
+                if(Mathf.Abs(reflectedLaserVector.x) > 0) {
+                    vertLaser.gameObject.SetActive(false);
+                    horizLaser.gameObject.SetActive(true);
+                }
+                else {
+                    vertLaser.gameObject.SetActive(true);
+                    horizLaser.gameObject.SetActive(false);
+                }
             }
         }
 
@@ -55,32 +61,49 @@ public class Reflector : MonoBehaviour, IPushable, IInteractable
                 lastBatteryHit.hitByLaser = false;
                 lastBatteryHit = null;
             }
+            if(lastReflectorHit != null) {
+                lastReflectorHit.reflecting = false;
+                lastReflectorHit = null;
+            }
             return;
         }
         
         for(int i = 0; i < hitsInReflectionPath.Length; i++) {
             RaycastHit2D hit = hitsInReflectionPath[i];
             Transform t = hit.transform;
-            laserLengthEnd = t.position;
-
-            if(t.TryGetComponent(out Reflector reflector)) {
-                reflector.laserDirection = reflectedLaserVector;
-                reflector.Reflect();
-
-                if(lastBatteryHit != null) {
-                    lastBatteryHit.hitByLaser = false;
-                    lastBatteryHit = null;
-                }
-                break;
+            Battery battery = null;
+            Reflector reflector = null;
+            
+            if(t) {
+                laserLengthEnd = t.position;
+                battery = t.GetComponent<Battery>();
+                reflector = t.GetComponent<Reflector>();
             }
 
-            if(t.TryGetComponent(out Battery battery)) {
+            if(battery) {
                 lastBatteryHit = battery;
                 battery.hitByLaser = true;
                 break;
             }
+            else if(reflector) {
+                lastReflectorHit = reflector;
+                if(reflector.LaserReceived(reflectedLaserVector)) {
+                    reflector.ReflectLaser(reflectedLaserVector);
+                    reflector.reflecting = true;
+                }
+                break;
+            }
+            else {
+                if(lastReflectorHit){
+                    lastReflectorHit.reflecting = false;
+                    lastReflectorHit = null;
+                }
+                if(lastBatteryHit) {
+                    lastBatteryHit.hitByLaser = false;
+                    lastBatteryHit = null;
+                }
+            }
         }
-        
     }
 
     void Start()
@@ -91,17 +114,43 @@ public class Reflector : MonoBehaviour, IPushable, IInteractable
     void Update()
     {        
         laserLengthStart = transform.position;
-        laserLengthEnd = transform.position;
-        foreach(Laser laser in lasers) {
-            Transform laserHit = laser.LaserRay(out laserDirection); 
-            if(laserHit == transform) {
-                Reflect();
+        if(!reflecting) {
+            if(lastReflectorHit) {
+                lastReflectorHit.reflecting = false;
+                lastReflectorHit = null;
             }
+            laserLengthEnd = laserLengthStart;
+        }
+        reflectedLaserVector = Vector2.zero;
+        Vector2 incomingLaserVector;
+        foreach(Laser laser in lasers) {
+            Transform laserHit = laser.LaserRay(out incomingLaserVector); 
+            if(laserHit != transform) {
+                continue;
+            }
+
+            if(LaserReceived(incomingLaserVector))
+                ReflectLaser(incomingLaserVector);
         }   
+        
         Vector2 laserLength = laserLengthEnd - laserLengthStart;
-        laserTransform.localScale = new Vector3(laserLength.magnitude, 1, 1);
+        horizLaser.localScale = new Vector3(laserLength.magnitude, 1, 1);
+        vertLaser.localScale = new Vector3(1, laserLength.magnitude, 1);
     }
-    void OnDrawGizmos() {
-        Gizmos.DrawRay(transform.position, reflectedLaserVector * 20);
+
+    public bool LaserReceived(Vector2 incomingDirection) {
+        foreach(Transform reflectionPoint in reflectionPoints) {
+            Vector2 acceptedDirection = transform.position - reflectionPoint.position;
+            int dot = Mathf.RoundToInt(Vector2.Dot(incomingDirection, acceptedDirection)); 
+            if(dot == 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void CancelReflection() {
+        lastReflectorHit.reflecting = false;
+        reflecting = false;
     }
 }

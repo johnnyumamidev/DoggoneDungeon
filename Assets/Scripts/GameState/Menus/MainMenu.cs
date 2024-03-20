@@ -41,5 +41,9 @@ public class MainMenu : MonoBehaviour
         GameStateManager.Instance.TransitionTo("LevelSelect");
         PlayerProgress.Instance.GetProgress();
     }
+
+    public void OpenTestEnvironment() {
+        GameStateManager.Instance.TransitionTo("TestEnvironment");
+    }
 }
 

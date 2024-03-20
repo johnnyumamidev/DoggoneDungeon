@@ -14,7 +14,6 @@ public class Laser : MonoBehaviour, IInteractable
     int previousIndex;
     [SerializeField] Transform laserStart;
     [SerializeField] bool active = false;
-    float laserLength = 5;
     [SerializeField] RaycastHit2D laserHit;
     public Transform LaserRay(out Vector2 direction) {
         direction = directions[rotationIndex];
