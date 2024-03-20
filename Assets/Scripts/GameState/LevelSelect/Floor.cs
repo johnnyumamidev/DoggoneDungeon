@@ -23,19 +23,10 @@ public class Floor : MonoBehaviour
             levelNodes.Add(level);
         }
 
-        foreach(LevelNode node in levelNodes) {
-            node.OnPlayerDetected += EnterLevel;
-        }
-
         for(int i = 0; i < levelNodes.Count; i++) {
             if(i <= PlayerProgress.Instance.completedPuzzles.Count) {
                 levelNodes[i].UnlockLevel();
             }
-        }
-    }
-    void OnDisable() {
-        foreach(LevelNode node in levelNodes) {
-            node.OnPlayerDetected -= EnterLevel;
         }
     }
     void Update() {
@@ -62,14 +53,6 @@ public class Floor : MonoBehaviour
         }
         
         return completedLevels.Count == levelNodes.Count;
-    }
-    void EnterLevel(LevelNode levelNode, bool unlocked) {
-        if(Input.GetKeyDown(KeyCode.Space) && unlocked) {
-            string scene = "PuzzleLevel";
-            GameStateManager.Instance.TransitionTo(scene);
-            GameStateManager.Instance.SetCurrentLevel(levelNode);
-            PlayerProgress.Instance.OnLevelEntered();
-        }
     }
     public void EnterFloor(Player player) {
         floorMap.SetActive(true);

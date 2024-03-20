@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-public class LevelNode : MonoBehaviour
+public class LevelNode : MonoBehaviour, IInteractable
 {
     public string levelName;
     public event Action<LevelNode, bool> OnPlayerDetected;
@@ -38,5 +38,24 @@ public class LevelNode : MonoBehaviour
 
     public void UnlockLevel() {
         unlocked = true;
+    }
+
+     void EnterLevel() {
+        string scene = "PuzzleLevel";
+        Debug.Log(scene);
+        GameStateManager.Instance.TransitionTo(scene);
+        GameStateManager.Instance.SetCurrentLevel(this);
+        PlayerProgress.Instance.OnLevelEntered();
+    }
+
+    public void Interact()
+    {
+        if(unlocked)
+            EnterLevel();
+    }
+
+    public void Cancel()
+    {
+        throw new NotImplementedException();
     }
 }
