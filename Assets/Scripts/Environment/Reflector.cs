@@ -55,8 +55,8 @@ public class Reflector : MonoBehaviour, IPushable, IInteractable
         }
 
         //handle reflection 
-        RaycastHit2D[] hitsInReflectionPath = Physics2D.RaycastAll(reflectionStartPos, reflectedLaserVector);
-        if(hitsInReflectionPath.Length == 0) {
+        RaycastHit2D hit = Physics2D.Raycast(reflectionStartPos, reflectedLaserVector);
+        if(!hit) {
             if(lastBatteryHit != null) {
                 lastBatteryHit.hitByLaser = false;
                 lastBatteryHit = null;
@@ -67,41 +67,36 @@ public class Reflector : MonoBehaviour, IPushable, IInteractable
             }
             return;
         }
+    
+        Transform t = hit.transform;
+        Battery battery = null;
+        Reflector reflector = null;
         
-        for(int i = 0; i < hitsInReflectionPath.Length; i++) {
-            RaycastHit2D hit = hitsInReflectionPath[i];
-            Transform t = hit.transform;
-            Battery battery = null;
-            Reflector reflector = null;
-            
-            if(t) {
-                laserLengthEnd = t.position;
-                battery = t.GetComponent<Battery>();
-                reflector = t.GetComponent<Reflector>();
-            }
+        if(t) {
+            laserLengthEnd = t.position;
+            battery = t.GetComponent<Battery>();
+            reflector = t.GetComponent<Reflector>();
+        }
 
-            if(battery) {
-                lastBatteryHit = battery;
-                battery.hitByLaser = true;
-                break;
+        if(battery) {
+            lastBatteryHit = battery;
+            battery.hitByLaser = true;
+        }
+        else if(reflector) {
+            lastReflectorHit = reflector;
+            if(reflector.LaserReceived(reflectedLaserVector)) {
+                reflector.ReflectLaser(reflectedLaserVector);
+                reflector.reflecting = true;
             }
-            else if(reflector) {
-                lastReflectorHit = reflector;
-                if(reflector.LaserReceived(reflectedLaserVector)) {
-                    reflector.ReflectLaser(reflectedLaserVector);
-                    reflector.reflecting = true;
-                }
-                break;
+        }
+        else {
+            if(lastReflectorHit){
+                lastReflectorHit.reflecting = false;
+                lastReflectorHit = null;
             }
-            else {
-                if(lastReflectorHit){
-                    lastReflectorHit.reflecting = false;
-                    lastReflectorHit = null;
-                }
-                if(lastBatteryHit) {
-                    lastBatteryHit.hitByLaser = false;
-                    lastBatteryHit = null;
-                }
+            if(lastBatteryHit) {
+                lastBatteryHit.hitByLaser = false;
+                lastBatteryHit = null;
             }
         }
     }
