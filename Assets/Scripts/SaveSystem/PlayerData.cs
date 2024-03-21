@@ -8,10 +8,12 @@ public class PlayerData
     public bool gameStarted;
     public int currentFloorIndex;
     public List<string> completedPuzzles = new List<string>();
+    public int keyCount;
     public PlayerData(PlayerProgress playerProgress) {
         levelsCompleted = playerProgress.levelsCompleted;
         gameStarted = playerProgress.gameStarted;
         currentFloorIndex = playerProgress.currentFloorIndex;
         completedPuzzles = playerProgress.completedPuzzles;
+        keyCount = playerProgress.keyCount;
     }
 }

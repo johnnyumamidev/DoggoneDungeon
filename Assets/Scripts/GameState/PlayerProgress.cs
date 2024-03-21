@@ -10,6 +10,7 @@ public class PlayerProgress : MonoBehaviour
     public int currentFloorIndex = 0;
     public Vector2 playerPosition;
     public List<string> completedPuzzles = new List<string>();
+    public int keyCount = 0;
     void Awake() {
         Instance = this;
     }
@@ -33,8 +34,12 @@ public class PlayerProgress : MonoBehaviour
         gameStarted = data.gameStarted;
         currentFloorIndex = data.currentFloorIndex;
         completedPuzzles = data.completedPuzzles;
+        keyCount = data.keyCount;
     }
     public void SavePlayerPosition(Vector2 position) {
         playerPosition = position;
+    }
+    public void CollectKey() {
+        keyCount++;
     }
 }
