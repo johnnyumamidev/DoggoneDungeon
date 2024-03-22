@@ -1,45 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
-public class Lock : MonoBehaviour
+public class Lock : MonoBehaviour, IInteractable
 {
-    [SerializeField] TileBase cageTile;
-    [SerializeField] Tilemap wallsTilemap;
-    public bool locked = true;
-    // Start is called before the first frame update
-    void Start()
+    public bool locked;
+
+    public void Cancel()
     {
-        
+        throw new System.NotImplementedException();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Interact()
     {
-        CheckForKey();
-        ControlCage();
-    }
-    void CheckForKey() {
-        Collider2D keyCheck = Physics2D.OverlapCircle((Vector2)transform.position + Vector2.down, 0.25f);
-        if(keyCheck && keyCheck.TryGetComponent(out Key key)) {
-            SavePuzzleProgress();
-            locked = false;
-            Destroy(key.gameObject);
-        }
-    }
-    void ControlCage() {
-        Vector3Int tilePosition = wallsTilemap.WorldToCell(transform.position);
-        if(locked) 
-            wallsTilemap.SetTile(tilePosition, cageTile);
-        else {
-            wallsTilemap.SetTile(tilePosition, null);
-        }
-    }
-    void SavePuzzleProgress() {
-        PlayerProgress.Instance.OnLevelCompleted(GameStateManager.Instance.currentLevelSceneName);
-    }
-
-    public void ControlLock(bool a) {
-        locked = !a;
+        Debug.Log("check for keys");
     }
 }

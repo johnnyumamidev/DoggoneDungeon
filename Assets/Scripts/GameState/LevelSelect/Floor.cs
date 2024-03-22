@@ -23,52 +23,10 @@ public class Floor : MonoBehaviour
             levelNodes.Add(level);
         }
 
-        foreach(LevelNode node in levelNodes) {
-            node.OnPlayerDetected += EnterLevel;
-        }
-
         for(int i = 0; i < levelNodes.Count; i++) {
             if(i <= PlayerProgress.Instance.completedPuzzles.Count) {
                 levelNodes[i].UnlockLevel();
             }
-        }
-    }
-    void OnDisable() {
-        foreach(LevelNode node in levelNodes) {
-            node.OnPlayerDetected -= EnterLevel;
-        }
-    }
-    void Update() {
-        HandleGuard();
-    }
-    private void HandleGuard() {
-        Vector3Int tilePosition = wallTilemap.WorldToCell(catGuardTransform.position);
-        if (!AllLevelsCleared())
-            wallTilemap.SetTile(tilePosition, catTile);
-        else {
-            wallTilemap.SetTile(tilePosition, null);
-        }   
-    }
-    bool AllLevelsCleared() {
-        List<LevelNode> completedLevels = new List<LevelNode>();
-        for(int i = 0; i < levelNodes.Count; i++) {
-            if(PlayerProgress.Instance.completedPuzzles.Count <= i)
-                continue;
-            
-            LevelNode level = levelNodes[i];
-            if(level.levelName == PlayerProgress.Instance.completedPuzzles[i]) {
-                completedLevels.Add(levelNodes[i]);
-            }
-        }
-        
-        return completedLevels.Count == levelNodes.Count;
-    }
-    void EnterLevel(LevelNode levelNode, bool unlocked) {
-        if(Input.GetKeyDown(KeyCode.Space) && unlocked) {
-            string scene = "PuzzleLevel";
-            GameStateManager.Instance.TransitionTo(scene);
-            GameStateManager.Instance.SetCurrentLevel(levelNode);
-            PlayerProgress.Instance.OnLevelEntered();
         }
     }
     public void EnterFloor(Player player) {

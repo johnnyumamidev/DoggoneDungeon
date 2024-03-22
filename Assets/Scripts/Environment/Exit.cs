@@ -2,38 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Exit : MonoBehaviour
+public class Exit : MonoBehaviour, IInteractable
 {
-    Lock[] locks;
+    [SerializeField] Lock[] locks;
     List<Lock> unlockedLocks = new List<Lock>();
-    // Start is called before the first frame update
-    void Start()
+
+    public void Cancel()
     {
-        locks = FindObjectsOfType<Lock>();
+        throw new System.NotImplementedException();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Interact()
     {
         foreach(Lock _lock in locks) {
             if(!_lock.locked && !unlockedLocks.Contains(_lock))
                 unlockedLocks.Add(_lock);
         }
-
-        Collider2D playerCheck = Physics2D.OverlapCircle(transform.position, 0.25f);
-        if(playerCheck && playerCheck.TryGetComponent(out Player player))
-        {
-            if(Input.GetKeyDown(KeyCode.Space))
-                ExitLevel();
-        }
+        if(unlockedLocks.Count == locks.Length)
+            Debug.Log("Floor cleared, go to next floor!");
     }
 
-    private void ExitLevel()
+    void Update()
     {
-        if (locks.Length == unlockedLocks.Count)
-        {
-            Debug.Log("level completed!");
-            GameStateManager.Instance.TransitionTo("LevelSelect");
-        }
+        
     }
 }
