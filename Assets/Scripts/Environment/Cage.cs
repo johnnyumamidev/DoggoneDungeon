@@ -6,19 +6,26 @@ using UnityEngine.Tilemaps;
 public class Cage : MonoBehaviour
 {
     [SerializeField] TileBase cageTile;
-    [SerializeField] Tilemap wallsTilemap;
-    public bool locked = true;
-    
+    [SerializeField] TileData tileData;
+    bool locked = true;
+    void OnEnable() {
+        if(tileData == null)
+            tileData = FindObjectOfType<TileData>();
+    }
     void Update()
     {
         ControlCage();
     }
     void ControlCage() {
-        Vector3Int tilePosition = wallsTilemap.WorldToCell(transform.position);
+        Vector3Int tilePosition = tileData.wallsTilemap.WorldToCell(transform.position);
         if(locked) 
-            wallsTilemap.SetTile(tilePosition, cageTile);
+            tileData.wallsTilemap.SetTile(tilePosition, cageTile);
         else {
-            wallsTilemap.SetTile(tilePosition, null);
+            tileData.wallsTilemap.SetTile(tilePosition, null);
         }
+    }
+
+    public void Unlock() {
+        locked = false;
     }
 }

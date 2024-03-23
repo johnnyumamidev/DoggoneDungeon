@@ -1607,8 +1607,6 @@ Tilemap:
   m_TileSpriteArray:
   - m_RefCount: 3
     m_Data: {fileID: -2041963681, guid: a2236606637ae924ca7634199bea0970, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   m_TileMatrixArray:
   - m_RefCount: 7
     m_Data:
@@ -1841,7 +1839,7 @@ PrefabInstance:
     - target: {fileID: 1000330161684915855, guid: efb4338a9e58db04aa0217e6aad52bbf, type: 3}
       propertyPath: testEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2023105118}
+      objectReference: {fileID: 0}
     - target: {fileID: 1000330161684915855, guid: efb4338a9e58db04aa0217e6aad52bbf, type: 3}
       propertyPath: testEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ControlLock
@@ -3063,21 +3061,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8911355126835925786, guid: 269f5759a05bbf740a519d149880e20a, type: 3}
       propertyPath: m_Name
-      value: Lock
+      value: Cage
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 269f5759a05bbf740a519d149880e20a, type: 3}
---- !u!114 &2023105118 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1767295269506504064, guid: 269f5759a05bbf740a519d149880e20a, type: 3}
-  m_PrefabInstance: {fileID: 2023105117}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a1ae2e6490d2334093dfd950bbd97ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2142815787
 PrefabInstance:
   m_ObjectHideFlags: 0

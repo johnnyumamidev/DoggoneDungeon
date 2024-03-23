@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class TileData : MonoBehaviour
 {
-    [SerializeField] Tilemap groundTilemap, wallsTilemap;
+    public Tilemap groundTilemap, wallsTilemap;
 
     public bool ValidTile(Vector2 target) {
         Vector3Int gridPosition = groundTilemap.WorldToCell(target);

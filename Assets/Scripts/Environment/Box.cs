@@ -37,6 +37,7 @@ public class Box : MonoBehaviour, IPushable, ITrigger
 
     void Update() {
         if(!tileData.ValidTile(transform.position) && !OnMovingPlatform(transform.position)) {
+            //Destroy box
         }
     }
 }
