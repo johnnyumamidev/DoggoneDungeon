@@ -15,6 +15,11 @@ public class PuzzleManager : MonoBehaviour
         userInput.GetPlayer();
         tileData = FindObjectOfType<TileData>();
         FindObjectOfType<Player>().SetTileData(tileData);
+
+        if(PlayerProgress.Instance.completedPuzzles.Contains(GameStateManager.Instance.CurrentLevel.name)) {
+            Key key = FindObjectOfType<Key>();
+            Destroy(key.gameObject);
+        }
     }
 
     #region TimeIncrementation

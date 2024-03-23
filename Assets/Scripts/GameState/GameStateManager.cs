@@ -25,6 +25,7 @@ public class GameStateManager : MonoBehaviour
             PlayerProgress.Instance.SavePlayerPosition(FindObjectOfType<Player>().transform.position);
         }
         SceneManager.LoadScene(sceneName);
+        SaveSystem.SaveProgress(PlayerProgress.Instance);
     }
     public void SetCurrentLevel(LevelNode _levelNode) {
         CurrentLevel = _levelNode;

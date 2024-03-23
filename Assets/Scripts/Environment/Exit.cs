@@ -6,7 +6,6 @@ public class Exit : MonoBehaviour, IInteractable
 {
     [SerializeField] Lock[] locks;
     List<Lock> unlockedLocks = new List<Lock>();
-
     public void Cancel()
     {
         throw new System.NotImplementedException();
@@ -15,11 +14,14 @@ public class Exit : MonoBehaviour, IInteractable
     public void Interact()
     {
         foreach(Lock _lock in locks) {
-            if(!_lock.locked && !unlockedLocks.Contains(_lock))
+            if(_lock.unlocked && !unlockedLocks.Contains(_lock))
                 unlockedLocks.Add(_lock);
         }
         if(unlockedLocks.Count == locks.Length)
             Debug.Log("Floor cleared, go to next floor!");
+        else {
+            Debug.Log("There are still locks remaining");
+        }
     }
 
     void Update()

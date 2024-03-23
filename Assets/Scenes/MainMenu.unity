@@ -1399,6 +1399,7 @@ MonoBehaviour:
   currentFloorIndex: 0
   playerPosition: {x: 0, y: 0}
   completedPuzzles: []
+  keysCollected: 0
 --- !u!4 &930336657
 Transform:
   m_ObjectHideFlags: 0
