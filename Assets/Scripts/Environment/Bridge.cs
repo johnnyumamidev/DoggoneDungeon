@@ -6,25 +6,24 @@ using UnityEngine.Tilemaps;
 public class Bridge : MonoBehaviour
 {
     [SerializeField] TileBase bridgeTile;
-    [SerializeField] Tilemap groundTilemap;
+    [SerializeField] TileData tileData;
     bool active;
+    void OnEnable() {
+        if(tileData == null)
+            tileData = FindObjectOfType<TileData>();
+    }
     public void Activate(bool b) {
         active = b;
     }
     void Update() {
-        Vector3Int tilePosition = groundTilemap.WorldToCell(transform.position);
-        if(active) {
-            groundTilemap.SetTile(tilePosition, bridgeTile);
-        }
-        else {
-            groundTilemap.SetTile(tilePosition, null);
-        }
-
-        EnableChildren(active);
-    }
-    void EnableChildren(bool a) {
-        foreach(Transform child in transform) {
-            child.gameObject.SetActive(a);
+        foreach(Transform spawnPoint in transform) {
+            Vector3Int tilePosition = tileData.groundTilemap.WorldToCell(spawnPoint.position);
+            if(active) {
+                tileData.groundTilemap.SetTile(tilePosition, bridgeTile);
+            }
+            else {
+                tileData.groundTilemap.SetTile(tilePosition, null);
+            }
         }
     }
 }

@@ -8,8 +8,8 @@ public class Spikes : MonoBehaviour
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Sprite spikesUpSprite, spikesDownSprite;
     bool active = true;
-    public void Activate(bool b) {
-        active = !b;
+    public void Activate(ISwitch _switch) {
+        active = !_switch.IsTriggered();
         if(active) {
             spriteRenderer.sprite = spikesUpSprite;
         }

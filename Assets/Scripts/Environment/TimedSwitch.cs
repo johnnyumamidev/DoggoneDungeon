@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-public class TimedSwitch : MonoBehaviour, IInteractable, ITicker
+public class TimedSwitch : MonoBehaviour, IInteractable, ITicker, ISwitch
 {
-    [SerializeField] UnityEvent<bool> onInteracted;
+    [SerializeField] UnityEvent<ISwitch> onInteracted;
     [SerializeField] UnityEvent onTimeElapsed;
     [SerializeField] SpriteRenderer spriteRenderer;
     bool active = false;
@@ -22,19 +22,25 @@ public class TimedSwitch : MonoBehaviour, IInteractable, ITicker
         if(ticks > tickCount) {
             ticks = 0;
             active = false;
-            onTimeElapsed?.Invoke();
+            onInteracted?.Invoke(this);
         }
+        Debug.Log(name + " tick: " + ticks);
     }
 
     public void Interact()
     {
         active = true;
-        onInteracted?.Invoke(active);
+        onInteracted?.Invoke(this);
         angle = 90;
     }
 
     public void Cancel() {
         active = false;
-        onInteracted?.Invoke(active);
+        onInteracted?.Invoke(this);
+    }
+
+    public bool IsTriggered()
+    {
+        return active;
     }
 }

@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Linq;
 public class PuzzleManager : MonoBehaviour
 {
     public float incrementLength = 0.5f;
-    [SerializeField] List<Transform> tickers = new List<Transform>();
+    [SerializeField] List<ITicker> tickers;
     TileData tileData;
     void OnEnable() {
         StartCoroutine(IncrementTime());
+        tickers = new List<ITicker>(FindObjectsOfType<MonoBehaviour>().OfType<ITicker>());
+        Debug.Log(tickers == null);
     }
     void Start() {
         UserInput userInput = FindObjectOfType<UserInput>();
@@ -34,8 +36,8 @@ public class PuzzleManager : MonoBehaviour
     }
 
     void NotifyTickers() {
-        foreach(Transform ticker in tickers) {
-            ticker.GetComponent<ITicker>().Tick();
+        foreach(ITicker ticker in tickers) {
+            ticker.Tick();
         }
     }
     #endregion

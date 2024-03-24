@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Battery : MonoBehaviour
+public class Battery : MonoBehaviour, ISwitch
 {
-    public UnityEvent<bool> emitPower;
+    public UnityEvent<ISwitch> emitPower;
     [SerializeField] Laser[] lasers;
     public enum PowerType { Normal, Reversed };
     public PowerType powerType;
     bool powered = false;
     public bool hitByLaser = false;
+    [SerializeField] SpriteRenderer spriteRenderer;
     void Start()
     {
         lasers = FindObjectsOfType<Laser>();
@@ -19,12 +20,13 @@ public class Battery : MonoBehaviour
     void Update()
     {
         powered = CheckForPower();
-
-        if(powerType == PowerType.Normal)
-            emitPower?.Invoke(powered);
-        else {
-            emitPower?.Invoke(!powered);
+        spriteRenderer.color = Color.blue;
+        if(powerType == PowerType.Reversed) {
+            powered = !CheckForPower();
+            spriteRenderer.color = Color.red;
         }
+
+        emitPower?.Invoke(this);
     }
 
     bool CheckForPower() {
@@ -35,5 +37,10 @@ public class Battery : MonoBehaviour
         }
 
         return false | hitByLaser;
+    }
+
+    public bool IsTriggered()
+    {
+        return powered;
     }
 }

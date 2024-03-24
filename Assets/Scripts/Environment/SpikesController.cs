@@ -29,10 +29,12 @@ public class SpikesController : MonoBehaviour, ITicker
         foreach(Transform spikesParent in spikesParents) {
             foreach (Transform child in spikesParent) {
                 Spikes spikes = child.GetComponent<Spikes>();
-                if(spikesParent == spikesParents[activeSpikesIndex])
-                    spikes.Activate(false);
+                if(spikesParent == spikesParents[activeSpikesIndex]) {
+
+                    // spikes.Activate(false);
+                }
                 else {
-                    spikes.Activate(true);
+                    // spikes.Activate(true);
                 }
             }
         }
@@ -65,7 +67,7 @@ public class SpikesController : MonoBehaviour, ITicker
         foreach(Transform parent in spikesParents) {
             foreach(Transform child in parent) {
                 if(child.TryGetComponent(out Spikes spikes)) {
-                    spikes.Activate(b);
+                    // spikes.Activate(b);
                 }
             }
         }

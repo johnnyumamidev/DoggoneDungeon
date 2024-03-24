@@ -91,12 +91,12 @@ public class Player : MonoBehaviour, IUnit, ITrigger
 
         if(!tileData.ValidTile(transform.position) && !onMovingPlatform) {
             CheckpointSystem checkpointSystem = FindObjectOfType<CheckpointSystem>();
-            checkpointSystem?.PlacePlayerAtCheckpoint(transform);
+            if(checkpointSystem)
+                checkpointSystem.PlacePlayerAtCheckpoint(transform);
         }
     }
 
     public void CommandDogToSit() {
-        Debug.Log("sit");
         dogFollower = null;
     }
 }

@@ -196,3 +196,4 @@ MonoBehaviour:
   lasers: []
   powerType: 0
   hitByLaser: 0
+  spriteRenderer: {fileID: 538522385749294895}
