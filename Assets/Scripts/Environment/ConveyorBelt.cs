@@ -7,6 +7,8 @@ public class ConveyorBelt : MonoBehaviour, ITicker
 {
     [SerializeField] List<ConveyorBeltNode> conveyorBeltNodes;
     bool active = true;
+    int ticks;
+    public int ticksRequired = 2;
     void Awake() {
         ConveyorBeltNode[] nodes = FindObjectsOfType<ConveyorBeltNode>();
         foreach(ConveyorBeltNode node in nodes) {
@@ -29,6 +31,11 @@ public class ConveyorBelt : MonoBehaviour, ITicker
         if(!active) 
             return;
 
+        ticks++;
+        if(ticks < ticksRequired) {
+            return;
+        }
+        ticks = 0;
         foreach(ConveyorBeltNode node in conveyorBeltNodes) {
             node.MoveTriggerTransform();
         }

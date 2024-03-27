@@ -1365,6 +1365,7 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 128
+  cooldownLength: 0.175
 --- !u!1 &930336655
 GameObject:
   m_ObjectHideFlags: 0
@@ -1399,7 +1400,6 @@ MonoBehaviour:
   currentFloorIndex: 0
   playerPosition: {x: 0, y: 0}
   completedPuzzles: []
-  keysCollected: 0
 --- !u!4 &930336657
 Transform:
   m_ObjectHideFlags: 0

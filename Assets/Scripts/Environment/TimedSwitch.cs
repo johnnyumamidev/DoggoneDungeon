@@ -5,7 +5,6 @@ using UnityEngine.Events;
 public class TimedSwitch : MonoBehaviour, IInteractable, ITicker, ISwitch
 {
     [SerializeField] UnityEvent<ISwitch> onInteracted;
-    [SerializeField] UnityEvent onTimeElapsed;
     [SerializeField] SpriteRenderer spriteRenderer;
     bool active = false;
     int ticks;
@@ -24,10 +23,9 @@ public class TimedSwitch : MonoBehaviour, IInteractable, ITicker, ISwitch
             active = false;
             onInteracted?.Invoke(this);
         }
-        Debug.Log(name + " tick: " + ticks);
     }
 
-    public void Interact()
+    public void Interact(Transform interactor)
     {
         active = true;
         onInteracted?.Invoke(this);

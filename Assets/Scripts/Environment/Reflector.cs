@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Reflector : MonoBehaviour, IPushable, IInteractable
+public class Reflector : MonoBehaviour, IPushable
 {
     [SerializeField] Laser[] lasers;
     Vector2 reflectedLaserVector;
@@ -20,15 +20,6 @@ public class Reflector : MonoBehaviour, IPushable, IInteractable
     public void Push(Vector2 vector)
     {
         transform.position += (Vector3)vector;
-    }
-    public void Interact()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void Cancel()
-    {
-        throw new System.NotImplementedException();
     }
     
     public void ReflectLaser(Vector2 incomingVector) {

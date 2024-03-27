@@ -13,6 +13,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] Color disabledColor, enabledColor;
     void Start() {
         newGameWarning.SetActive(false);
+        PlayerProgress.Instance.GetProgress();
         PlayerData data = SaveSystem.LoadFile();
         Debug.Log("gameStarted? " + data.gameStarted);
 

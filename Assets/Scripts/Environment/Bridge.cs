@@ -12,8 +12,8 @@ public class Bridge : MonoBehaviour
         if(tileData == null)
             tileData = FindObjectOfType<TileData>();
     }
-    public void Activate(bool b) {
-        active = b;
+    public void Activate(ISwitch _switch) {
+        active = _switch.IsTriggered();
     }
     void Update() {
         foreach(Transform spawnPoint in transform) {

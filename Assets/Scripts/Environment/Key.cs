@@ -27,7 +27,9 @@ public class Key : MonoBehaviour, IPushable
     void Update() {
         //Check for cage
         Collider2D cageCheck = Physics2D.OverlapCircle(transform.position, 0.25f);
-        if(cageCheck && cageCheck.TryGetComponent(out Cage cage))
+        if(cageCheck && cageCheck.TryGetComponent(out Cage cage)) {
             cage.Unlock();
+            Destroy(gameObject);
+        }
     }
 }

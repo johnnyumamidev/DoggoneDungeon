@@ -22,12 +22,6 @@ public class Floor : MonoBehaviour
             LevelNode level = node.GetComponent<LevelNode>();
             levelNodes.Add(level);
         }
-
-        for(int i = 0; i < levelNodes.Count; i++) {
-            if(i <= PlayerProgress.Instance.completedPuzzles.Count) {
-                levelNodes[i].UnlockLevel();
-            }
-        }
     }
     public void EnterFloor(Player player) {
         floorMap.SetActive(true);

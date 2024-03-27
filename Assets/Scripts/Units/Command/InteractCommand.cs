@@ -17,9 +17,8 @@ public class InteractCommand : ICommand
     {
         Vector3 checkPosition = unitTransform.position + (Vector3)input;
         Collider2D collider = Physics2D.OverlapCircle(checkPosition, 0.1f, interactableLayer);
-        if(collider) {
-            interactable = collider.GetComponent<IInteractable>();
-            interactable?.Interact();
+        if(collider && collider.TryGetComponent(out IInteractable interactable)) {
+            interactable?.Interact(unitTransform);
         }
     }
 

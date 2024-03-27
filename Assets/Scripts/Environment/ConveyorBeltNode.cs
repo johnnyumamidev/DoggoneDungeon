@@ -7,7 +7,7 @@ public class ConveyorBeltNode : MonoBehaviour
     public enum Direction { Up, Down, Left, Right }
     [SerializeField] Direction direction;
     [SerializeField] Transform directionTarget;
-    Transform triggerTransform;
+    Transform pushableTransform;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,19 +18,19 @@ public class ConveyorBeltNode : MonoBehaviour
     void Update()
     {
         Collider2D collider = Physics2D.OverlapCircle(transform.position, 0.25f);
-        if(collider && collider.TryGetComponent(out ITrigger trigger))
-            triggerTransform = collider.transform;
+        if(collider && (collider.TryGetComponent(out IPushable pushable) || collider.TryGetComponent(out Player player)))
+            pushableTransform = collider.transform;
         else {
-            triggerTransform = null;
+            pushableTransform = null;
         }
     }
     public void MoveTriggerTransform() {
         Vector3 moveDirection = directionTarget.position - transform.position;
         Collider2D obstacle = Physics2D.OverlapCircle(directionTarget.position, 0.25f);
-        if(triggerTransform != null && !obstacle) {
-            triggerTransform.position += moveDirection;
-            if(triggerTransform.parent != null) {
-                triggerTransform.parent = null;
+        if(pushableTransform != null && !obstacle) {
+            pushableTransform.position += moveDirection;
+            if(pushableTransform.parent != null) {
+                pushableTransform.parent = null;
             }
         }
     }

@@ -63,11 +63,11 @@ public class SpikesController : MonoBehaviour, ITicker
     }
     #endregion
 
-    public void ActivateAllSpikes(bool b) {
+    public void ActivateAllSpikes(ISwitch _switch) {
         foreach(Transform parent in spikesParents) {
             foreach(Transform child in parent) {
                 if(child.TryGetComponent(out Spikes spikes)) {
-                    // spikes.Activate(b);
+                    spikes.Activate(_switch);
                 }
             }
         }

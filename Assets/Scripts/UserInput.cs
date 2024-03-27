@@ -10,6 +10,8 @@ public class UserInput : MonoBehaviour
     UnitCommandInvoker unitCommandInvoker;
     [SerializeField] LayerMask interactableLayer;
     public event Action OnPause;
+    bool moveInputLocked = false;
+    [SerializeField] float cooldownLength = 0.25f;
     void Start() {
         unitCommandInvoker = new UnitCommandInvoker();
     }
@@ -31,9 +33,13 @@ public class UserInput : MonoBehaviour
         bool reset = Input.GetKeyDown(KeyCode.R);
         bool confirm = Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.Space);
         bool dogSit = Input.GetKeyDown(KeyCode.E);
+        bool move = (moveVector != Vector2.zero) && !moveInputLocked;
         //movement input
-        if (moveVector != Vector2.zero)
+        if (move)
         {
+            moveInputLocked = true;
+            StartCoroutine(MoveCooldown());
+
             Transform unitTransform = player.transform;
 
             ICommand interactCommand = new InteractCommand(unitTransform, moveVector, interactableLayer);
@@ -68,9 +74,9 @@ public class UserInput : MonoBehaviour
     public Vector2 GetMovementInput() {
         if(GameStateManager.Instance.gamePaused)
             return Vector2.zero;
-        bool h = Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D);
-        bool v = Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.W);
-
+        bool h = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D);
+        bool v = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.W);
+        
         if(h) {
             return new Vector2(Input.GetAxisRaw("Horizontal"), 0);
         }
@@ -79,6 +85,10 @@ public class UserInput : MonoBehaviour
         }
 
         return Vector2.zero;
+    }
+    IEnumerator MoveCooldown() {
+        yield return new WaitForSeconds(cooldownLength);
+        moveInputLocked = false;
     }
     void HandlePauseInput() {
         bool pause = Input.GetKeyDown(KeyCode.Escape);

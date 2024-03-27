@@ -16,7 +16,7 @@ public class Exit : MonoBehaviour, IInteractable
         throw new System.NotImplementedException();
     }
 
-    public void Interact()
+    public void Interact(Transform interactor)
     {
         // foreach(Lock _lock in locks) {
         //     if(_lock.unlocked && !unlockedLocks.Contains(_lock))
@@ -27,6 +27,12 @@ public class Exit : MonoBehaviour, IInteractable
         // else {
         //     Debug.Log("There are still locks remaining");
         // }
+
+        if(unlocked)
+            Debug.Log("door open, proceed to next floor");
+        else {
+            Debug.Log("door locked");
+        }
     }
     void Start() {
         foreach(Transform child in switchesParent) {

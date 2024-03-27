@@ -18,9 +18,13 @@ public class PuzzleManager : MonoBehaviour
         tileData = FindObjectOfType<TileData>();
         FindObjectOfType<Player>().SetTileData(tileData);
 
-        if(PlayerProgress.Instance.completedPuzzles.Contains(GameStateManager.Instance.CurrentLevel.name)) {
+        if(PlayerProgress.Instance.completedPuzzles.Contains(GameStateManager.Instance.currentLevelSceneName)) {
             Key key = FindObjectOfType<Key>();
             Destroy(key.gameObject);
+            Dog dog = FindObjectOfType<Dog>();
+            Destroy(dog.gameObject);
+            Cage cage = FindObjectOfType<Cage>();
+            Destroy(cage.gameObject);
         }
     }
 

@@ -42,7 +42,7 @@ public class Laser : MonoBehaviour, IInteractable
     void HandleRotation() {
         transform.rotation = Quaternion.Euler(0,0,rotationAngles[rotationIndex]);
     }
-    public void Interact()
+    public void Interact(Transform interactor)
     {
         previousIndex = rotationIndex;
         if(rotationIndex < rotationAngles.Count-1) {
