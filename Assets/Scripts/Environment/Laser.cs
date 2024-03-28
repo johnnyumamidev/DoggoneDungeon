@@ -14,15 +14,20 @@ public class Laser : MonoBehaviour, IInteractable
     int previousIndex;
     [SerializeField] Transform laserStart;
     [SerializeField] bool active = false;
-    [SerializeField] RaycastHit2D laserHit;
+    bool laserHit = false;
+    RaycastHit2D hit;
+    Vector2 laserLength = Vector2.down * 20;
     public Transform LaserRay(out Vector2 direction) {
         direction = directions[rotationIndex];
         if(!active) 
             return null;
-        RaycastHit2D hit = Physics2D.Raycast(laserStart.position, direction);
+        hit = Physics2D.Raycast(laserStart.position, direction);
         if(hit) {
-            laserHit = hit;
+            laserHit = true;
             return hit.transform;
+        }
+        else {
+            laserHit = false;
         }
         return null;
     }
@@ -33,11 +38,13 @@ public class Laser : MonoBehaviour, IInteractable
     void Update() {
         HandleRotation();
 
-        Vector2 laserVector = Vector2.down * 10;
         if(laserHit) {
-            laserVector = laserHit.point - (Vector2)laserStart.position;         
+            Vector2 laserVector = hit.point - (Vector2)laserStart.position;  
+            laserStart.localScale = new Vector3(1, laserVector.magnitude, 1);
         }
-        laserStart.localScale = new Vector3(1, laserVector.magnitude, 1);
+        else {
+            laserStart.localScale = new Vector3(1, laserLength.magnitude, 1);
+        }
     }
     void HandleRotation() {
         transform.rotation = Quaternion.Euler(0,0,rotationAngles[rotationIndex]);
