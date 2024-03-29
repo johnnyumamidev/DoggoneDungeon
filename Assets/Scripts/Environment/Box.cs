@@ -26,7 +26,7 @@ public class Box : MonoBehaviour, IPushable, ITrigger
         return true;
     }
 
-    bool OnMovingPlatform(Vector2 target) {
+    public bool OnMovingPlatform(Vector2 target) {
         Collider2D collider = Physics2D.OverlapCircle(target, 0.25f);
         if(collider && collider.TryGetComponent(out MovingPlatform movingPlatform)) {
             transform.parent = movingPlatform.transform;

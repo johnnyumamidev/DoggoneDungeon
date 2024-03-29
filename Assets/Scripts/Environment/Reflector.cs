@@ -19,7 +19,12 @@ public class Reflector : MonoBehaviour, IPushable
 
     public void Push(Vector2 vector)
     {
-        transform.position += (Vector3)vector;
+        Vector3 target = transform.position + (Vector3)vector;
+        if(NoObstacles(target) || OnMovingPlatform(target)) {
+            if(!OnMovingPlatform(vector)) 
+                transform.parent = null;
+            transform.position += (Vector3)vector;
+        }
     }
     
     public void ReflectLaser(Vector2 incomingVector) {
@@ -138,5 +143,15 @@ public class Reflector : MonoBehaviour, IPushable
     public void CancelReflection() {
         lastReflectorHit.reflecting = false;
         reflecting = false;
+    }
+
+    public bool OnMovingPlatform(Vector2 vector)
+    {
+        Collider2D collider = Physics2D.OverlapCircle(vector, 0.25f);
+        if(collider && collider.TryGetComponent(out MovingPlatform movingPlatform)) {
+            transform.parent = movingPlatform.transform;
+            return true;
+        }
+        return false;
     }
 }

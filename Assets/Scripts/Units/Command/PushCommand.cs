@@ -18,15 +18,14 @@ public class PushCommand : ICommand
         Collider2D col = Physics2D.OverlapCircle(checkPosition, 0.25f);
         
         if(col) {
-            pushable = col.GetComponent<IPushable>();
             pushablePreviousPosition = col.transform.position;
-            pushable?.Push(input);
-            
+            pushable = col.GetComponent<IPushable>();
+            pushable.Push(input);
         }
     }
 
     public void Undo()
     {
-        pushable?.Push(pushablePreviousPosition - ((MonoBehaviour)pushable).transform.position);
+        pushable.Push(pushablePreviousPosition - ((MonoBehaviour)pushable).transform.position);
     }
 }

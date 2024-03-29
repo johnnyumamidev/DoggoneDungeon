@@ -1365,7 +1365,7 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 128
-  cooldownLength: 0.175
+  cooldownLength: 0.125
 --- !u!1 &930336655
 GameObject:
   m_ObjectHideFlags: 0

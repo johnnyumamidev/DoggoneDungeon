@@ -9,7 +9,7 @@ public class Battery : MonoBehaviour, ISwitch
     [SerializeField] Laser[] lasers;
     public enum PowerType { Normal, Reversed };
     public PowerType powerType;
-    bool powered = false;
+    [SerializeField] bool powered = false;
     public bool hitByLaser = false;
     [SerializeField] SpriteRenderer spriteRenderer;
     void Start()

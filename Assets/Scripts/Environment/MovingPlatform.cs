@@ -11,11 +11,23 @@ public class MovingPlatform : MonoBehaviour, ITicker
     public int ticksRequired = 3;
     public float platformSpeed = 10;
     [SerializeField] bool active = false;
+    Laser[] lasers;
+    Collider2D platformCollider;
+    void Awake() {
+        lasers = FindObjectsOfType<Laser>();
+        platformCollider = GetComponent<Collider2D>();
+    }
     void Update()
     {
         currentWaypointPosition = waypoints[currentWaypointIndex].position;
         transform.position = 
             Vector3.Lerp(transform.position, currentWaypointPosition, platformSpeed * Time.deltaTime);
+
+        platformCollider.enabled = true;
+        foreach(Laser laser in lasers) {
+            if(laser.LaserRay(out Vector2 direction) == transform)
+                platformCollider.enabled = false;
+        }
     }
 
     public void UpdateWaypoint() {
@@ -34,8 +46,8 @@ public class MovingPlatform : MonoBehaviour, ITicker
             currentWaypointIndex = 0;
     }
 
-    public void Activate(bool b) {
-        active = b;
+    public void Activate(ISwitch _switch) {
+        active = _switch.IsTriggered();
     }
 
     public bool AtWayPoint() {
