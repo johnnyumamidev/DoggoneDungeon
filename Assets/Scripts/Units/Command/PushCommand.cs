@@ -20,7 +20,7 @@ public class PushCommand : ICommand
         if(col) {
             pushablePreviousPosition = col.transform.position;
             pushable = col.GetComponent<IPushable>();
-            pushable.Push(input);
+            pushable?.Push(input);
         }
     }
 
