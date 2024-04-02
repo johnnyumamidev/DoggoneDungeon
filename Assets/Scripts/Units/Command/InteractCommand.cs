@@ -17,13 +17,15 @@ public class InteractCommand : ICommand
     {
         Vector3 checkPosition = unitTransform.position + (Vector3)input;
         Collider2D collider = Physics2D.OverlapCircle(checkPosition, 0.1f, interactableLayer);
-        if(collider && collider.TryGetComponent(out IInteractable interactable)) {
+        if(collider) {
+            interactable = collider.GetComponent<IInteractable>();
             interactable?.Interact(unitTransform);
         }
     }
 
     public void Undo()
     {
+        Debug.Log(interactable == null);
         interactable?.Cancel();
     }
 }

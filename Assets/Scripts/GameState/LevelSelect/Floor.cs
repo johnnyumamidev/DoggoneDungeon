@@ -8,9 +8,6 @@ public class Floor : MonoBehaviour
     [SerializeField] TileData tileData;
     [SerializeField] GameObject floorMap;
     [SerializeField] Transform start;
-    [SerializeField] TileBase catTile;
-    [SerializeField] Tilemap wallTilemap;
-    [SerializeField] Transform catGuardTransform;
     [SerializeField] Transform levelNodesParent;
     [SerializeField] List<LevelNode> levelNodes = new List<LevelNode>();
     void Awake() {
@@ -18,6 +15,9 @@ public class Floor : MonoBehaviour
             floorMap = gameObject;
     }
     void Start() {
+        if(levelNodesParent == null)
+            return;
+            
         foreach(Transform node in levelNodesParent) {
             LevelNode level = node.GetComponent<LevelNode>();
             levelNodes.Add(level);

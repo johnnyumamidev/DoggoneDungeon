@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerProgress : MonoBehaviour
 {
     public static PlayerProgress Instance { get; private set; }
-    public int levelsCompleted = 0;
     public bool gameStarted = false;
     public int currentFloorIndex = 0;
     public Vector2 playerPosition;
@@ -23,14 +22,20 @@ public class PlayerProgress : MonoBehaviour
 
         SaveSystem.SaveProgress(this);
     }
+    public void OnFloorCompleted(int floorIndex) {
+        currentFloorIndex = floorIndex;
+        gameStarted = true;
+
+        SaveSystem.SaveProgress(this);
+    }
     public void ResetProgress() {
         gameStarted = false;
-        levelsCompleted = 0;
+        completedPuzzles.Clear();
+        SaveSystem.SaveProgress(this);
     }
     public void GetProgress() {
         Debug.Log("getting save data");
         PlayerData data = SaveSystem.LoadFile();
-        levelsCompleted = data.levelsCompleted;
         gameStarted = data.gameStarted;
         currentFloorIndex = data.currentFloorIndex;
         completedPuzzles = data.completedPuzzles;

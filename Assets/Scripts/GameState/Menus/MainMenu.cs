@@ -13,13 +13,12 @@ public class MainMenu : MonoBehaviour
     [SerializeField] Color disabledColor, enabledColor;
     void Start() {
         newGameWarning.SetActive(false);
-        PlayerProgress.Instance.GetProgress();
         PlayerData data = SaveSystem.LoadFile();
-        Debug.Log("gameStarted? " + data.gameStarted);
 
         if (data != null && data.gameStarted)
         {
             Debug.Log("game file exists");
+            PlayerProgress.Instance.GetProgress();
             continueButton.interactable = true;
             continueText.color = enabledColor;
         }
@@ -34,8 +33,8 @@ public class MainMenu : MonoBehaviour
         }
     }
     public void StartNewGame() {
-        GameStateManager.Instance.TransitionTo("LevelSelect");
         PlayerProgress.Instance.ResetProgress();
+        GameStateManager.Instance.TransitionTo("LevelSelect");
     }
 
     public void ContinueGame() {

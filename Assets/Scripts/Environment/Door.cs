@@ -5,6 +5,7 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     [SerializeField] List<ISwitch> switches = new List<ISwitch>();
+    public bool reverse = false;
     bool closed = true;
     Collider2D doorCollider;
     [SerializeField] SpriteRenderer spriteRenderer;
@@ -24,10 +25,14 @@ public class Door : MonoBehaviour
         for(int i = 0; i < switches.Count; i++) {
             if(switches[i].IsTriggered()) {
                 closed = false;
+                if(reverse)
+                    closed = true;
                 break;
             }
             else {
                 closed = true;
+                if(reverse)
+                    closed = false;
             }
         }
     }

@@ -10,7 +10,9 @@ public class Lever : MonoBehaviour, IInteractable, ISwitch
     bool active = false;
     public void Cancel()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("cancel lever");
+        active = !active;
+        OnToggle?.Invoke(this);
     }
 
     public void Interact(Transform interactor)

@@ -5,17 +5,30 @@ using UnityEngine;
 public class Key : MonoBehaviour, IPushable
 {
     [SerializeField] TileData tileData;
-    [SerializeField] LayerMask obstacle;
+    [SerializeField] int obstacle;
 
     void OnEnable() {
         if(tileData == null)
             tileData = FindObjectOfType<TileData>();
+        
+        obstacle = LayerMask.NameToLayer("Obstacle");
     }
     public bool NoObstacles(Vector2 target)
     {
-        Collider2D collider = Physics2D.OverlapCircle(target, 0.25f, obstacle);
-        if(collider || !tileData.ValidTile(target))
+        Collider2D collider = Physics2D.OverlapCircle(target, 0.25f);
+        if(!collider)
+            return true;
+
+        if(collider.gameObject.layer == obstacle)
             return false;
+
+        if(!tileData.ValidTile(target)) {
+            if(collider.TryGetComponent(out Cage cage))
+                return true;
+            else {
+                return false;
+            }
+        }
         return true;
     }
 

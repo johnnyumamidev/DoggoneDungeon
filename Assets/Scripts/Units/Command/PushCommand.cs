@@ -26,6 +26,6 @@ public class PushCommand : ICommand
 
     public void Undo()
     {
-        pushable.Push(pushablePreviousPosition - ((MonoBehaviour)pushable).transform.position);
+        pushable?.Push(pushablePreviousPosition - ((MonoBehaviour)pushable).transform.position);
     }
 }

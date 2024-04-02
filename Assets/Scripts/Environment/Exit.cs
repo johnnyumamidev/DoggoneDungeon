@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Exit : MonoBehaviour, IInteractable
 {
-    [SerializeField] Lock[] locks;
+    DungeonMapManager dungeonMapManager;
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Sprite closedSprite, openSprite;
     bool unlocked = false;
@@ -18,23 +18,21 @@ public class Exit : MonoBehaviour, IInteractable
 
     public void Interact(Transform interactor)
     {
-        // foreach(Lock _lock in locks) {
-        //     if(_lock.unlocked && !unlockedLocks.Contains(_lock))
-        //         unlockedLocks.Add(_lock);
-        // }
-        // if(unlockedLocks.Count == locks.Length)
-        //     Debug.Log("Floor cleared, go to next floor!");
-        // else {
-        //     Debug.Log("There are still locks remaining");
-        // }
-
-        if(unlocked)
+        if(unlocked) {
+            dungeonMapManager.TravelBetweenFloors(1);
             Debug.Log("door open, proceed to next floor");
+        }
         else {
             Debug.Log("door locked");
         }
     }
+    void Awake() {
+        dungeonMapManager = FindObjectOfType<DungeonMapManager>();
+    }
     void Start() {
+        if(switchesParent == null) 
+            return;
+
         foreach(Transform child in switchesParent) {
             if(child.TryGetComponent(out ISwitch _switch))
                 switches.Add(_switch);
@@ -42,9 +40,9 @@ public class Exit : MonoBehaviour, IInteractable
     }
     void Update()
     {
-        spriteRenderer.sprite = openSprite;
-        if(!unlocked) {
-            spriteRenderer.sprite = closedSprite;
+        spriteRenderer.sprite = closedSprite;
+        if(unlocked) {
+            spriteRenderer.sprite = openSprite;
         }
     }
     public void ControlDoor(ISwitch _switch) {

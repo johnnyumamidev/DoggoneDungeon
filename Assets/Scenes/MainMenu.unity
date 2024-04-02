@@ -1395,7 +1395,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b3aed634f8e39947a47ab63abd28ff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelsCompleted: 0
   gameStarted: 0
   currentFloorIndex: 0
   playerPosition: {x: 0, y: 0}

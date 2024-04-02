@@ -9,7 +9,7 @@ public class DungeonMapManager : MonoBehaviour
     [SerializeField] UserInput userInput;
     [SerializeField] List<Floor> floors = new List<Floor>();
     [SerializeField] int currentFloorIndex = 0;
-    Floor currentFloor;
+    [SerializeField] Floor currentFloor;
     
     void Awake() {
         if(player == null) 
@@ -22,16 +22,21 @@ public class DungeonMapManager : MonoBehaviour
         LoadCurrentFloor();
     }
     void LoadCurrentFloor() {
-        if(currentFloor == null)
-            currentFloor = floors[currentFloorIndex];
+        if(!PlayerProgress.Instance.gameStarted)
+            currentFloorIndex = 0;
+        else {
+            currentFloorIndex = PlayerProgress.Instance.currentFloorIndex;
+        }
 
-        currentFloorIndex = PlayerProgress.Instance.currentFloorIndex;
+        currentFloor = floors[currentFloorIndex];
         currentFloor.EnterFloor(player);
     }
     public void TravelBetweenFloors(int direction) {
         currentFloor.ExitFloor();
-        
-        currentFloor = floors[currentFloorIndex + direction];
+        currentFloorIndex += direction;
+        PlayerProgress.Instance.OnFloorCompleted(currentFloorIndex);
+
+        currentFloor = floors[currentFloorIndex];
         currentFloor.EnterFloor(player);
     }
 }   
