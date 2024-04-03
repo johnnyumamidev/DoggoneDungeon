@@ -14,7 +14,6 @@ public class LevelNode : MonoBehaviour, IInteractable
         string scene = "PuzzleLevel";
         GameStateManager.Instance.TransitionTo(scene);
         GameStateManager.Instance.SetCurrentLevel(this);
-        PlayerProgress.Instance.OnLevelEntered();
     }
 
     public void Cancel()

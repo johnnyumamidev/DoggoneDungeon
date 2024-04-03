@@ -94,6 +94,7 @@ public class UserInput : MonoBehaviour
         bool pause = Input.GetKeyDown(KeyCode.Escape);
         if(pause) {
             OnPause?.Invoke();
+            GameStateManager.Instance.PauseGame();
         }
     }
 }

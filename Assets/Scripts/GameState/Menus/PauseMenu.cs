@@ -28,10 +28,8 @@ public class PauseMenu : MonoBehaviour
         }
     }
     public void EnableMenu() {
-        Debug.Log(name);
         pauseMenu.SetActive(!pauseMenu.activeSelf);
         transparency.enabled = !transparency.enabled;
-        GameStateManager.Instance.PauseGame();
     }
     public void GoToTitleScreen() {
         GameStateManager.Instance.TransitionTo("MainMenu");

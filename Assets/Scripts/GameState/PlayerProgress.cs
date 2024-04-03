@@ -12,8 +12,10 @@ public class PlayerProgress : MonoBehaviour
     void Awake() {
         Instance = this;
     }
-    public void OnLevelEntered() {
+    public void OnTutorialComplete() {
         gameStarted = true;
+
+        SaveSystem.SaveProgress(this);
     }
     public void OnLevelCompleted(string levelName) {
         if(!completedPuzzles.Contains(levelName)) {
@@ -24,12 +26,12 @@ public class PlayerProgress : MonoBehaviour
     }
     public void OnFloorCompleted(int floorIndex) {
         currentFloorIndex = floorIndex;
-        gameStarted = true;
 
         SaveSystem.SaveProgress(this);
     }
     public void ResetProgress() {
         gameStarted = false;
+        currentFloorIndex = 0;
         completedPuzzles.Clear();
         SaveSystem.SaveProgress(this);
     }
@@ -39,8 +41,11 @@ public class PlayerProgress : MonoBehaviour
         gameStarted = data.gameStarted;
         currentFloorIndex = data.currentFloorIndex;
         completedPuzzles = data.completedPuzzles;
+        playerPosition = data.playerPosition;
     }
     public void SavePlayerPosition(Vector2 position) {
         playerPosition = position;
+
+        SaveSystem.SaveProgress(this);
     }
 }
