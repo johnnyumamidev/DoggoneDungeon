@@ -7,11 +7,14 @@ public class PlayerData
     public bool gameStarted;
     public int currentFloorIndex;
     public List<string> completedPuzzles = new List<string>();
-    public Vector2 playerPosition;
+    public float[] playerPosition;
     public PlayerData(PlayerProgress playerProgress) {
         gameStarted = playerProgress.gameStarted;
         currentFloorIndex = playerProgress.currentFloorIndex;
         completedPuzzles = playerProgress.completedPuzzles;
-        playerPosition = playerProgress.playerPosition;
+
+        playerPosition = new float[2];
+        playerPosition[0] = playerProgress.playerPosition.x;
+        playerPosition[1] = playerProgress.playerPosition.y;
     }
 }

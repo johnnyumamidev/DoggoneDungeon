@@ -41,7 +41,9 @@ public class PlayerProgress : MonoBehaviour
         gameStarted = data.gameStarted;
         currentFloorIndex = data.currentFloorIndex;
         completedPuzzles = data.completedPuzzles;
-        playerPosition = data.playerPosition;
+
+        playerPosition.x = data.playerPosition[0];
+        playerPosition.y = data.playerPosition[1];
     }
     public void SavePlayerPosition(Vector2 position) {
         playerPosition = position;

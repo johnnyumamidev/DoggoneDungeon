@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Key : MonoBehaviour, IPushable
 {
+    [SerializeField] UnityEvent keyUsed;
     [SerializeField] TileData tileData;
     [SerializeField] int obstacle;
 
@@ -47,6 +49,7 @@ public class Key : MonoBehaviour, IPushable
         Collider2D cageCheck = Physics2D.OverlapCircle(transform.position, 0.25f);
         if(cageCheck && cageCheck.TryGetComponent(out Cage cage)) {
             cage.Unlock();
+            keyUsed?.Invoke();
             Destroy(gameObject);
         }
     }

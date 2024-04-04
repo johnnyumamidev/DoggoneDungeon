@@ -5,6 +5,7 @@ using Cinemachine;
 
 public class TutorialManager : MonoBehaviour
 {
+    [SerializeField] DialogueManager dialogueManager;
     TutorialTask[] tutorialTasks;
     TutorialTask currentTask;
     [SerializeField] CinemachineVirtualCamera playerVirtualCam, speakerVirtualCam;
@@ -20,7 +21,8 @@ public class TutorialManager : MonoBehaviour
         currentTask = tutorialTasks[tutorialTasksCompleted];
         if(currentTask.taskComplete) {
             tutorialTasksCompleted++;
-            //Trigger next tutorial cutscene
+            GameStateManager.Instance.gamePaused = true;
+            dialogueManager.StartDialogue();
         }
     }
 }
