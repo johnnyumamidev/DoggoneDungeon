@@ -5,18 +5,19 @@ using UnityEngine.UI;
 
 public class CutsceneController : MonoBehaviour
 {
-    [SerializeField] Image image;
+    [SerializeField] Image cutsceneImage;
     [SerializeField] GameObject[] shots;
+    [SerializeField] GameObject overlay;
     int shotIndex;
     void Start()
     {
-        image.gameObject.SetActive(false);
+        cutsceneImage.gameObject.SetActive(false);
         foreach(GameObject shot in shots) {
             shot.SetActive(false);
         }
     }
     public void DisableImage() {
-        image.gameObject.SetActive(false);
+        cutsceneImage.gameObject.SetActive(false);
     }
     public void EnableImage(int index) {
         shotIndex = index;
@@ -27,6 +28,11 @@ public class CutsceneController : MonoBehaviour
                 shots[i].SetActive(false);
             }
         }
-        image.gameObject.SetActive(true);
+        cutsceneImage.gameObject.SetActive(true);
+    }
+    public void HideCutscene() {
+        overlay.SetActive(false);
+        cutsceneImage.gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }
