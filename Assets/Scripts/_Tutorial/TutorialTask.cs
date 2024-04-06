@@ -5,6 +5,7 @@ using UnityEngine;
 public class TutorialTask : MonoBehaviour
 {
     public bool taskComplete = false;
+    public float waitTimeAfterComplete;
 
     public void CompleteTask() {
         taskComplete = true;

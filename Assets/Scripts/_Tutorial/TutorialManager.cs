@@ -26,6 +26,7 @@ public class TutorialManager : MonoBehaviour
        
         if(currentTask.taskComplete) {
             OnTaskCompleted?.Invoke();
+            StartCoroutine(DelayBeforeNextTask(currentTask.waitTimeAfterComplete));
             GameStateManager.Instance.gamePaused = true;
             tutorialTasksCompleted++;
         }
@@ -33,5 +34,10 @@ public class TutorialManager : MonoBehaviour
 
     public void Continue() {
         GameStateManager.Instance.gamePaused = false;
+    }
+
+    IEnumerator DelayBeforeNextTask(float delay) {
+        yield return new WaitForSeconds(delay);
+        dialogueManager.StartDialogue();
     }
 }

@@ -28,7 +28,7 @@ public class DialogueManager : MonoBehaviour
     }
     void Update() {
         textBox.text = dialogueScenes[currentSceneIndex].dialogueLines[currentLineIndex];
-        if(GameStateManager.Instance.gamePaused) {
+        if(GameStateManager.Instance.dialogueActive) {
             speakerVirtualCam.Priority = dialogueScenes[currentSceneIndex].cameraPriority;
             if(Input.GetKeyDown(KeyCode.Space))
                 StartCoroutine(TransitionToNextLine());
@@ -50,17 +50,22 @@ public class DialogueManager : MonoBehaviour
         }
         else {
             OnSceneEnd?.Invoke();
+            GameStateManager.Instance.dialogueActive = false;
             dialogueBox.SetActive(false);
             if(currentSceneIndex < dialogueScenes.Count-1) {
                 currentSceneIndex++;
                 currentLineIndex = 0;
             }
-
+            else {            
+                Debug.Log("end of tutorial");
+                GameStateManager.Instance.TransitionTo("LevelSelect");
+            }
             //transition to next set of dialogue and begin gameplay
         }
+
     }
     public void StartDialogue() {
-        GameStateManager.Instance.gamePaused = true;
+        GameStateManager.Instance.dialogueActive = true;
         OnDialogueStart?.Invoke(currentLineIndex);
         dialogueBox.SetActive(true);
     }
