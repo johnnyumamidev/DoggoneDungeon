@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: TutorialScene1
   m_EditorClassIdentifier: 
   dialogueLines:
-  - In a far off land, there lies a great kingdom
-  - A kingdom where dogs reign supreme
-  - In that kingdom, lies a grand castle
-  - And in that castle courtyard, lies a hero
-  - But this hero does not yet know of the adventure that awaits him
+  - <i>In a far off land, there lies the Great Kingdom of Daughaus...</i>
+  - A kingdom where Dogs reign supreme over all animals...
+  - In that kingdom, lies a grand castle...And in that grand castle's courtyard,
+    lies our hero...
+  - But our hero is still but a pup, and has much to learn...
+  - After he wakes up from his nap, that is.
+  cameraPriority: 0

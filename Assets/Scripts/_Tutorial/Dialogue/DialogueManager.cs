@@ -58,7 +58,6 @@ public class DialogueManager : MonoBehaviour
             }
             else {            
                 Debug.Log("end of tutorial");
-                GameStateManager.Instance.TransitionTo("LevelSelect");
             }
             //transition to next set of dialogue and begin gameplay
         }

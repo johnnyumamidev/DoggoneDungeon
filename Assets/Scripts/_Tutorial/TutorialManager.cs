@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class TutorialManager : MonoBehaviour
 {
-    [SerializeField] UnityEvent OnTaskCompleted;
     [SerializeField] DialogueManager dialogueManager;
     TutorialTask[] tutorialTasks;
     TutorialTask currentTask;
@@ -20,12 +18,12 @@ public class TutorialManager : MonoBehaviour
     {
         if(tutorialTasksCompleted >= tutorialTasks.Length) {
             Debug.Log("tutorial complete!");
+            GameStateManager.Instance.TransitionTo("LevelSelect");
             return;
         }
         currentTask = tutorialTasks[tutorialTasksCompleted];
        
         if(currentTask.taskComplete) {
-            OnTaskCompleted?.Invoke();
             StartCoroutine(DelayBeforeNextTask(currentTask.waitTimeAfterComplete));
             GameStateManager.Instance.gamePaused = true;
             tutorialTasksCompleted++;
@@ -33,6 +31,7 @@ public class TutorialManager : MonoBehaviour
     }
 
     public void Continue() {
+        currentTask.TaskEvent();
         GameStateManager.Instance.gamePaused = false;
     }
 

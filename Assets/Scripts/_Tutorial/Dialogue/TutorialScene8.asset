@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79bb66e851f7f2941ab5e29de985e95c, type: 3}
-  m_Name: TutorialScene2
+  m_Name: TutorialScene8
   m_EditorClassIdentifier: 
   dialogueLines:
-  - 'Hey, rookie! '
-  - Wake up! You're LATE!!
-  - Use "WASD" to MOVE.
-  - Get your butt up and over here RIGHT. NOW!!!
+  - And under NO circustances are you to let this prisoner escape. Understand?
+  - Good. Complete this task and you will have proven your loyalty to the Kingdom
+    of Dawghaus.
+  - Now, if you will excuse me, I have urgent business elsewhere. I've wasted enough
+    of my precious time here.
+  - ' I leave the prisoner in your hands. Farewell.'
   cameraPriority: 0

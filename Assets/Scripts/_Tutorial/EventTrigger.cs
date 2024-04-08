@@ -5,9 +5,15 @@ using UnityEngine.Events;
 
 public class EventTrigger : MonoBehaviour
 {
+    [SerializeField] GameObject trigger;
     [SerializeField] UnityEvent OnTriggered;
     public void OnTriggerEnter2D(Collider2D collider) {
-        if(collider.TryGetComponent(out Player player)) {
+        if(GameStateManager.Instance.dialogueActive || GameStateManager.Instance.gamePaused) {
+            return;
+        }
+
+        if(collider.gameObject == trigger) {
+            gameObject.SetActive(false);
             OnTriggered?.Invoke();
         }
     }

@@ -10,11 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79bb66e851f7f2941ab5e29de985e95c, type: 3}
-  m_Name: TutorialScene2
+  m_Name: TutorialScene9
   m_EditorClassIdentifier: 
   dialogueLines:
-  - 'Hey, rookie! '
-  - Wake up! You're LATE!!
-  - Use "WASD" to MOVE.
-  - Get your butt up and over here RIGHT. NOW!!!
+  - '* Meeooow *'
   cameraPriority: 0

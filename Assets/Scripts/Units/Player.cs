@@ -9,6 +9,8 @@ public class Player : MonoBehaviour, IUnit, ITrigger
     [SerializeField] LayerMask obstacleLayer;
     bool onMovingPlatform = false;
     public Dog dogFollower;
+    Vector3 target;
+    [SerializeField] float moveSpeed = 2f;
     public void Move(Vector2 input, bool undo)
     {
         Vector3 position = transform.position + (Vector3)input;
@@ -35,7 +37,7 @@ public class Player : MonoBehaviour, IUnit, ITrigger
                     }
                 }
             }
-            transform.position = roundedPosition;
+            target = roundedPosition;
         } 
 
         if(dogFollower) {
@@ -84,8 +86,11 @@ public class Player : MonoBehaviour, IUnit, ITrigger
     public void SetTileData(TileData _tileData) {
         tileData = _tileData;
     }
-
+    void Start() {
+        target = transform.position;
+    }
     void Update() {
+        transform.position = Vector3.Lerp(transform.position, target, moveSpeed * Time.deltaTime);
         if(tileData == null) 
             return;
 

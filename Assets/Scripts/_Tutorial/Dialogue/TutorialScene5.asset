@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: TutorialScene5
   m_EditorClassIdentifier: 
   dialogueLines:
-  - 5-1
-  - 5-2
-  - 5-3
-  - 5-4
-  - 5-5
+  - Hear that horn? Sounds like the patrol found a "GUEST" outside the keep.
+  - Let's let them in and give them a tour of the place.
+  - See that BUTTON? It can control all sorts of things. This one LOWERS THE DRAWBRIDGE.
+  - You can STAND on it or PUSH THE BOX onto it to activate it.
+  - Hurry up and lower that bridge! THAT'S AN ORDER!!
+  cameraPriority: 2

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.Events;
 public class CutsceneController : MonoBehaviour
 {
     [SerializeField] GameObject cutsceneGameObject;
@@ -10,6 +10,7 @@ public class CutsceneController : MonoBehaviour
     [SerializeField] CanvasGroup overlay;
     [SerializeField] float fadeTime;
     int shotIndex;
+    [SerializeField] UnityEvent OnCutsceneEnd;
 
     void Start()
     {
@@ -36,8 +37,10 @@ public class CutsceneController : MonoBehaviour
     }
     public void HideCutscene() {
         overlay.LeanAlpha(0, fadeTime);
-        if(cutsceneGameObject != null)
+        if(cutsceneGameObject != null) {
             cutsceneGameObject.SetActive(false);
+            OnCutsceneEnd?.Invoke();
+        }
         cutsceneGameObject = null;
     }
 }

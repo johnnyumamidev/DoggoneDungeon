@@ -13,10 +13,15 @@ MonoBehaviour:
   m_Name: TutorialScene3
   m_EditorClassIdentifier: 
   dialogueLines:
-  - scene 3 line 1
-  - scene 3 line 2
-  - 'scene 3 line 3
-
-'
-  - scene 3 line 4
+  - GOOD MORNING, SUNSHINE! Did you get enough beauty rest?
+  - While you were napping, all the other recruits have already finished their training
+    and gone home!
+  - Because of you, I was forced to wait around here. And now I'm LOCKED out of the
+    courtyard!
+  - We need to open the gate but the LEVER is blocked by those CRATES.
+  - To PUSH OBJECTS, move towards them. You can INTERACT with LEVERS and other objects
+    the same way.
+  - And if you MAKE A MISTAKE, you can UNDO your moves by pressing "Z"
+  - ...
+  - Well, what're you waiting for? Get to work!
   cameraPriority: 2

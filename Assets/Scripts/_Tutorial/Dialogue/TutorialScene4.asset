@@ -13,10 +13,6 @@ MonoBehaviour:
   m_Name: TutorialScene4
   m_EditorClassIdentifier: 
   dialogueLines:
-  - "4 -1\n\t"
-  - '4- 2
-
-'
-  - 4-3
-  - 4-4
+  - Nice work, rookie. Keep following orders and you may make a fine soldier yet!
+  - Let's head into the courtyard. Quickly! QUIT DRAGGING THOSE PAWS!
   cameraPriority: 2

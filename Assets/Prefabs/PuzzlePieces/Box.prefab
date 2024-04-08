@@ -50,7 +50,8 @@ MonoBehaviour:
   tileData: {fileID: 0}
   obstacle:
     serializedVersion: 2
-    m_Bits: 576
+    m_Bits: 704
+  pushSpeed: 18
 --- !u!50 &2147222625
 Rigidbody2D:
   serializedVersion: 4

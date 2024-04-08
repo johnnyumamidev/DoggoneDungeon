@@ -6,6 +6,11 @@ public class Box : MonoBehaviour, IPushable, ITrigger
 {
     [SerializeField] TileData tileData;
     [SerializeField] LayerMask obstacle;
+    Vector3 targetPosition;
+    [SerializeField] float pushSpeed = 18;
+    void Awake() {
+        targetPosition = transform.position;
+    }
     void Start() {
         if(tileData == null) tileData = FindObjectOfType<TileData>();
     }
@@ -15,7 +20,7 @@ public class Box : MonoBehaviour, IPushable, ITrigger
         if(NoObstacles(target) || OnMovingPlatform(target)) {
             if(!OnMovingPlatform(target)) 
                 transform.parent = null;
-            transform.position += (Vector3)input;
+            targetPosition += (Vector3)input;
         }
     }
 
@@ -34,8 +39,8 @@ public class Box : MonoBehaviour, IPushable, ITrigger
         }
         return false;
     }
-
     void Update() {
+        transform.position = Vector3.Lerp(transform.position, targetPosition, pushSpeed * Time.deltaTime);
         if(!tileData.ValidTile(transform.position) && !OnMovingPlatform(transform.position)) {
             //Destroy box
         }
