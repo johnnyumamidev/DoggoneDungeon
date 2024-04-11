@@ -11,7 +11,7 @@ public class EventTrigger : MonoBehaviour
         if(GameStateManager.Instance.dialogueActive || GameStateManager.Instance.gamePaused) {
             return;
         }
-
+        
         if(collider.gameObject == trigger) {
             gameObject.SetActive(false);
             OnTriggered?.Invoke();

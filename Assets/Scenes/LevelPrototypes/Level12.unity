@@ -270,7 +270,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -589,7 +589,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1473,9 +1473,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   incrementLength: 0.5
-  tickers:
-  - {fileID: 2055771472}
-  - {fileID: 2121087235}
 --- !u!4 &383620582
 Transform:
   m_ObjectHideFlags: 0
@@ -1845,6 +1842,7 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 128
+  cooldownLength: 0.25
 --- !u!4 &605550069
 Transform:
   m_ObjectHideFlags: 0
@@ -2497,7 +2495,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2716,7 +2714,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2783,11 +2781,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!4 &2055771472 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1135992400606202787, guid: 3a51ab5347b26694c95cdd39e4c7026f, type: 3}
-  m_PrefabInstance: {fileID: 948953128}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2060218246 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7283323400136771551, guid: 188cd7b126a507440a60a541aabef872, type: 3}
@@ -2797,9 +2790,4 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2539333641016948413, guid: c07c8e9e9f4b0b049a3f1ab260e6094c, type: 3}
   m_PrefabInstance: {fileID: 770615297}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &2121087235 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1135992400606202787, guid: 3a51ab5347b26694c95cdd39e4c7026f, type: 3}
-  m_PrefabInstance: {fileID: 486499008}
   m_PrefabAsset: {fileID: 0}

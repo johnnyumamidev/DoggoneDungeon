@@ -52,7 +52,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -130,7 +130,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c58ffe20a059124f82a6eebc0493c9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  locks: []
   spriteRenderer: {fileID: 8870159491065725640}
   closedSprite: {fileID: 21300000, guid: caccd388ce41db7418ac30afb5002e55, type: 3}
   openSprite: {fileID: 21300000, guid: 848ca1e526a006848ab6be951dce99cc, type: 3}
