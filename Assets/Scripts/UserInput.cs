@@ -14,6 +14,7 @@ public class UserInput : MonoBehaviour
     [SerializeField] float cooldownLength = 0.25f;
     void Start() {
         unitCommandInvoker = new UnitCommandInvoker();
+        GetPlayer();
     }
     void Update()
     {

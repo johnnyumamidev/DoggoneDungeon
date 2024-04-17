@@ -34,7 +34,7 @@ public class MainMenu : MonoBehaviour
     }
     public void StartNewGame() {
         PlayerProgress.Instance.ResetProgress();
-        GameStateManager.Instance.TransitionTo("Tutorial");
+        GameStateManager.Instance.TransitionTo("TutorialLevel");
     }
 
     public void ContinueGame() {
