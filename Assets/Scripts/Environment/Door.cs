@@ -10,6 +10,8 @@ public class Door : MonoBehaviour
     Collider2D doorCollider;
     [SerializeField] SpriteRenderer spriteRenderer;
     void Awake() {
+        if(reverse)
+            closed = false;
         doorCollider = GetComponent<Collider2D>();
     }
 
