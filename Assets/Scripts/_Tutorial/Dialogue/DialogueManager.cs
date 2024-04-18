@@ -29,12 +29,12 @@ public class DialogueManager : MonoBehaviour
     void Update() {
         textBox.text = dialogueScenes[currentSceneIndex].dialogueLines[currentLineIndex];
         if(GameStateManager.Instance.dialogueActive) {
-            speakerVirtualCam.Priority = dialogueScenes[currentSceneIndex].cameraPriority;
+            // speakerVirtualCam.Priority = dialogueScenes[currentSceneIndex].cameraPriority;
             if(Input.GetKeyDown(KeyCode.Space))
                 StartCoroutine(TransitionToNextLine());
         }
         else {
-            speakerVirtualCam.Priority = 0;
+            // speakerVirtualCam.Priority = 0;
         }
 
     }

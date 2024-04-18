@@ -18,10 +18,13 @@ public class Spring : MonoBehaviour
     }
     void Update() {
         ChangeSpringColor();
+        if(!activated) 
+            return;
+            
+        LaunchObject(GetLanchable());
     }
     public void Activate(ISwitch _switch) {
         activated = _switch.IsTriggered();
-        LaunchObject(CheckForLaunchable());
     }
     void ChangeSpringColor() {
         SpriteRenderer spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -31,20 +34,17 @@ public class Spring : MonoBehaviour
             spriteRenderer.color = Color.white;
         }
     }
-    Transform CheckForLaunchable() {
+    Transform GetLanchable() {
         Collider2D launchableCheck = Physics2D.OverlapCircle(transform.position, 0.25f);
 
-        if(launchableCheck.TryGetComponent(out IPushable pushable) || launchableCheck.TryGetComponent(out Player player))
+        if(launchableCheck.TryGetComponent(out ITrigger trigger)) {
             return launchableCheck.transform;
+        }
         return null;
     }
     void LaunchObject(Transform launchable) {
-        if(launchable == null)
-            return;
+        launchable.TryGetComponent(out ITrigger trigger);
         
-        //disable launchable obj collider2D until landing
-        
-
         StartCoroutine(LaunchArc(launchable, springTarget.position));
 
         //push any objects upon landing

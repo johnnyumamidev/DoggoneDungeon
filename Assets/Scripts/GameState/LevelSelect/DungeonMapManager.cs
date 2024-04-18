@@ -28,8 +28,10 @@ public class DungeonMapManager : MonoBehaviour
             currentFloorIndex = PlayerProgress.Instance.currentFloorIndex;
         }
 
-        currentFloor = floors[currentFloorIndex];
-        currentFloor.EnterFloor(player);
+        if(floors.Count != 0) {
+            currentFloor = floors[currentFloorIndex];
+            currentFloor.EnterFloor(player);
+        }
     }
     public void TravelBetweenFloors(int direction) {
         currentFloor.ExitFloor();

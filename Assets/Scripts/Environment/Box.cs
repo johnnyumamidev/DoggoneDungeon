@@ -17,7 +17,13 @@ public class Box : MonoBehaviour, IPushable, ITrigger
     public void Push(Vector2 input)
     {
         Vector3 target = transform.position + (Vector3)input;
-        if(NoObstacles(target) || OnMovingPlatform(target)) {
+        if(!tileData.ValidTile(target)) {
+            if(!tileData.groundTilemap.HasTile(tileData.groundTilemap.WorldToCell(target))) {
+                StartCoroutine(DropBoxIntoPit(input));
+                return;
+            }
+        }
+        else if(NoObstacles(target) || OnMovingPlatform(target)) {
             if(!OnMovingPlatform(target)) 
                 transform.parent = null;
             targetPosition += (Vector3)input;
@@ -26,7 +32,7 @@ public class Box : MonoBehaviour, IPushable, ITrigger
 
     public bool NoObstacles(Vector2 target) {
         Collider2D collider = Physics2D.OverlapCircle(target, 0.25f, obstacle);
-        if(collider || !tileData.ValidTile(target))
+        if(collider)
             return false;
         return true;
     }
@@ -44,5 +50,16 @@ public class Box : MonoBehaviour, IPushable, ITrigger
         if(!tileData.ValidTile(transform.position) && !OnMovingPlatform(transform.position)) {
             //Destroy box
         }
+    }
+
+    IEnumerator DropBoxIntoPit(Vector2 vector) {
+        targetPosition += (Vector3)vector;
+        yield return new WaitForSeconds(1);
+        gameObject.SetActive(false);
+    }
+
+    public void SetTarget()
+    {
+        throw new System.NotImplementedException();
     }
 }

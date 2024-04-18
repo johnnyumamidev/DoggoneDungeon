@@ -51,5 +51,8 @@ public class Laser : MonoBehaviour
         else {
             laserStart.localScale = new Vector3(1, laserLength.magnitude, 1);
         }
+
+        rotationIndex = Mathf.Clamp(rotationIndex, 0, rotationAngles.Count-1);
+        transform.rotation = Quaternion.Euler(0, 0, rotationAngles[rotationIndex]);
     }
 }

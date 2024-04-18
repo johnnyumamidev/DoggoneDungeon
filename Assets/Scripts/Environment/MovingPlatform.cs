@@ -31,16 +31,6 @@ public class MovingPlatform : MonoBehaviour, ITicker
     }
 
     public void UpdateWaypoint() {
-        if(!active) return;
-
-        tickCounter++;
-        if(tickCounter <= ticksRequired) {
-            return;
-        }
-        else {
-            tickCounter = 0;
-        }
-
         currentWaypointIndex++;
         if(currentWaypointIndex >= waypoints.Count)
             currentWaypointIndex = 0;
@@ -60,6 +50,16 @@ public class MovingPlatform : MonoBehaviour, ITicker
 
     public void Tick()
     {
+        if(!active) return;
+
+        tickCounter++;
+        if(tickCounter <= ticksRequired) {
+            return;
+        }
+        else {
+            tickCounter = 0;
+        }
+
         UpdateWaypoint();
     }
 
