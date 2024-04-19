@@ -15,7 +15,7 @@ public class Lever : MonoBehaviour, IInteractable, ISwitch
         OnToggle?.Invoke(this);
     }
 
-    public void Interact(Transform interactor)
+    public void Interact()
     {
         active = !active;
         OnToggle?.Invoke(this);

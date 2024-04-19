@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IInteractable
 {
-    void Interact(Transform interactor);
+    void Interact();
     void Cancel();
 }

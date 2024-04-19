@@ -9,8 +9,7 @@ public class LevelNode : MonoBehaviour, IInteractable
         levelName = name;
     }
 
-    public void Interact(Transform interactor)
-    {
+    public void Interact() {
         string scene = "PuzzleLevel";
         GameStateManager.Instance.TransitionTo(scene);
         GameStateManager.Instance.SetCurrentLevel(this);

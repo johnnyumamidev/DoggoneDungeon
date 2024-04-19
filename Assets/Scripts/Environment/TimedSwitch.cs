@@ -25,7 +25,7 @@ public class TimedSwitch : MonoBehaviour, IInteractable, ITicker, ISwitch
         }
     }
 
-    public void Interact(Transform interactor)
+    public void Interact()
     {
         active = true;
         onInteracted?.Invoke(this);

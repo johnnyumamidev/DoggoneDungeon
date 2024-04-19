@@ -11,7 +11,11 @@ public class MainMenu : MonoBehaviour
     public Button continueButton;
     public Button newGamebutton;
     [SerializeField] Color disabledColor, enabledColor;
+    [SerializeField] AudioClip songClip;
+    [SerializeField] AudioClip sfxClip;
     void Start() {
+        AudioManager.PlayMusic(songClip);
+
         newGameWarning.SetActive(false);
         PlayerData data = SaveSystem.LoadFile();
 
@@ -47,6 +51,10 @@ public class MainMenu : MonoBehaviour
     }
     public void OpenTestEnvironment() {
         GameStateManager.Instance.TransitionTo("TestEnvironment");
+    }
+
+    public void PlayHoverSFX() {
+        AudioManager.PlaySFX(sfxClip);
     }
 }
 

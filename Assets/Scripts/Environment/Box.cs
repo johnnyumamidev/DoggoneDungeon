@@ -16,14 +16,10 @@ public class Box : MonoBehaviour, IPushable, ITrigger
     }
     public void Push(Vector2 input)
     {
+        Debug.Log(name + " pushed");
         Vector3 target = transform.position + (Vector3)input;
-        if(!tileData.ValidTile(target)) {
-            if(!tileData.groundTilemap.HasTile(tileData.groundTilemap.WorldToCell(target))) {
-                StartCoroutine(DropBoxIntoPit(input));
-                return;
-            }
-        }
-        else if(NoObstacles(target) || OnMovingPlatform(target)) {
+
+        if(NoObstacles(target) || OnMovingPlatform(target)) {
             if(!OnMovingPlatform(target)) 
                 transform.parent = null;
             targetPosition += (Vector3)input;
@@ -32,7 +28,7 @@ public class Box : MonoBehaviour, IPushable, ITrigger
 
     public bool NoObstacles(Vector2 target) {
         Collider2D collider = Physics2D.OverlapCircle(target, 0.25f, obstacle);
-        if(collider)
+        if(collider || !tileData.ValidTile(target))
             return false;
         return true;
     }
@@ -46,10 +42,10 @@ public class Box : MonoBehaviour, IPushable, ITrigger
         return false;
     }
     void Update() {
+        if(transform.parent != null) 
+            targetPosition = transform.parent.position;
+
         transform.position = Vector3.Lerp(transform.position, targetPosition, pushSpeed * Time.deltaTime);
-        if(!tileData.ValidTile(transform.position) && !OnMovingPlatform(transform.position)) {
-            //Destroy box
-        }
     }
 
     IEnumerator DropBoxIntoPit(Vector2 vector) {

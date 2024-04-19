@@ -9,18 +9,18 @@ public class PuzzleExit : MonoBehaviour, IInteractable
         throw new System.NotImplementedException();
     }
 
-    public void Interact(Transform interactor)
+    public void Interact()
     {
-        if(interactor.TryGetComponent(out Player player)) {
-            if(player.dogFollower || PlayerProgress.Instance.completedPuzzles.Contains(GameStateManager.Instance.currentLevelSceneName)) {
-                PlayerProgress.Instance.OnLevelCompleted(GameStateManager.Instance.currentLevelSceneName);
-                Debug.Log("dog rescued, exit level");
-            }
-            else {
-                Debug.Log("dog not rescued yet!");
-            }
+        // if(interactor.TryGetComponent(out Player player)) {
+        //     if(player.dogFollower || PlayerProgress.Instance.completedPuzzles.Contains(GameStateManager.Instance.currentLevelSceneName)) {
+        //         PlayerProgress.Instance.OnLevelCompleted(GameStateManager.Instance.currentLevelSceneName);
+        //         Debug.Log("dog rescued, exit level");
+        //     }
+        //     else {
+        //         Debug.Log("dog not rescued yet!");
+        //     }
 
-            GameStateManager.Instance.TransitionTo("LevelSelect");
-        }
+        //     GameStateManager.Instance.TransitionTo("LevelSelect");
+        // }
     }
 }

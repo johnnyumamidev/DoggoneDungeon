@@ -19,7 +19,7 @@ public class InteractCommand : ICommand
         Collider2D collider = Physics2D.OverlapCircle(checkPosition, 0.1f, interactableLayer);
         if(collider) {
             interactable = collider.GetComponent<IInteractable>();
-            interactable?.Interact(unitTransform);
+            interactable?.Interact();
         }
     }
 

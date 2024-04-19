@@ -16,7 +16,7 @@ public class Exit : MonoBehaviour, IInteractable
         throw new System.NotImplementedException();
     }
 
-    public void Interact(Transform interactor)
+    public void Interact()
     {
         if(unlocked) {
             dungeonMapManager.TravelBetweenFloors(1);

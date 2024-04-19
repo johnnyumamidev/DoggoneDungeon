@@ -13,9 +13,10 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] TMP_Text textBox;
 
     [SerializeField] List<SceneSO> dialogueScenes = new();    
-    int currentSceneIndex;
+    SceneSO currentScene;
+    [SerializeField] int currentSceneIndex;
 
-    int currentLineIndex;
+    [SerializeField] int currentLineIndex;
     [SerializeField] float delayTime = 2f;
     [SerializeField] CinemachineVirtualCamera speakerVirtualCam;
 
@@ -27,7 +28,8 @@ public class DialogueManager : MonoBehaviour
         Invoke("StartDialogue", delayTime);
     }
     void Update() {
-        textBox.text = dialogueScenes[currentSceneIndex].dialogueLines[currentLineIndex];
+        currentScene = dialogueScenes[currentSceneIndex];
+        textBox.text = currentScene.dialogueLines[currentLineIndex];
         if(GameStateManager.Instance.dialogueActive) {
             // speakerVirtualCam.Priority = dialogueScenes[currentSceneIndex].cameraPriority;
             if(Input.GetKeyDown(KeyCode.Space))
@@ -41,12 +43,12 @@ public class DialogueManager : MonoBehaviour
     IEnumerator TransitionToNextLine() {
         OnDialogueEnd?.Invoke();
         dialogueBox.SetActive(false);
-        yield return new WaitForSeconds(delayTime);
 
-        if(currentLineIndex < dialogueScenes[currentSceneIndex].dialogueLines.Count - 1) {
+        yield return new WaitForSeconds(0.7f);
+
+        if(currentLineIndex < currentScene.dialogueLines.Count - 1) {
             currentLineIndex++;
-            OnDialogueStart?.Invoke(currentLineIndex);
-            dialogueBox.SetActive(true);
+            StartDialogue();
         }
         else {
             OnSceneEnd?.Invoke();
@@ -61,7 +63,6 @@ public class DialogueManager : MonoBehaviour
             }
             //transition to next set of dialogue and begin gameplay
         }
-
     }
     public void StartDialogue() {
         GameStateManager.Instance.dialogueActive = true;

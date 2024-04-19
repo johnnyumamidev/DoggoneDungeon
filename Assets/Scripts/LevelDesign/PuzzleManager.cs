@@ -7,12 +7,15 @@ public class PuzzleManager : MonoBehaviour
     public float incrementLength = 0.5f;
     [SerializeField] List<ITicker> tickers;
     TileData tileData;
+    [SerializeField] AudioClip musicClip;
     void OnEnable() {
         StartCoroutine(IncrementTime());
         tickers = new List<ITicker>(FindObjectsOfType<MonoBehaviour>().OfType<ITicker>());
         Debug.Log(tickers == null);
     }
     void Start() {
+        AudioManager.PlayMusic(musicClip);
+
         UserInput userInput = FindObjectOfType<UserInput>();
         userInput.GetPlayer();
         tileData = FindObjectOfType<TileData>();

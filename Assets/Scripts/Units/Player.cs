@@ -26,7 +26,7 @@ public class Player : MonoBehaviour, IUnit, ITrigger
                 }
                 else {
                     Vector3 tileInFrontOfPushable = position + (Vector3)input; 
-                    if(!pushable.NoObstacles(tileInFrontOfPushable))
+                    if(!pushable.NoObstacles(tileInFrontOfPushable)) 
                         return;
                     
                     Collider2D[] colliders = Physics2D.OverlapCircleAll(position, 0.25f);
@@ -39,7 +39,7 @@ public class Player : MonoBehaviour, IUnit, ITrigger
             }
             target = roundedPosition;
         } 
-
+ 
         if(dogFollower) {
             dogFollower.FollowPlayer(transform, input);
         }
@@ -90,7 +90,11 @@ public class Player : MonoBehaviour, IUnit, ITrigger
         target = transform.position;
     }
     void Update() {
+        if(transform.parent != null) 
+            target = transform.parent.position;
+        
         transform.position = Vector3.Lerp(transform.position, target, moveSpeed * Time.deltaTime);
+        
         if(tileData == null) 
             return;
 

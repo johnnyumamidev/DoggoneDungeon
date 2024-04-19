@@ -3521,6 +3521,42 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7283323399927278798, guid: 188cd7b126a507440a60a541aabef872, type: 3}
   m_PrefabInstance: {fileID: 1265142621}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &901316009 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7901299508855424666, guid: 873efe264a4204a47bc4340aa9676cd5, type: 3}
+  m_PrefabInstance: {fileID: 569220817}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &901316010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 901316009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42072ec8260689d42a7054eb6e79d639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  cooldownLength: 0.25
+--- !u!114 &901316013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 901316009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b24394c880201324abfbcef95833cbd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gamePaused: 0
+  dialogueActive: 0
+  currentLevelSceneName: 
 --- !u!4 &902381628 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1722381141591109664, guid: 0df47b56a3c75e9499389d05f1565b9a, type: 3}

@@ -13,10 +13,7 @@ MonoBehaviour:
   m_Name: TutorialScene1
   m_EditorClassIdentifier: 
   dialogueLines:
-  - <i>In a far off land, there lies the Great Kingdom of Daughaus...</i>
-  - A kingdom where Dogs reign supreme over all animals...
-  - In that kingdom, lies a grand castle...And in that grand castle's courtyard,
-    lies our hero...
-  - But our hero is still but a pup, and has much to learn...
-  - After he wakes up from his nap, that is.
+  - Ah...so you've come...
+  - You think you can save them, do you?
+  - Hmph, good luck, I suppose.
   cameraPriority: 0

@@ -46,7 +46,7 @@ public class UserInput : MonoBehaviour
             ICommand interactCommand = new InteractCommand(unitTransform, moveVector, interactableLayer);
             unitCommandInvoker.AddCommand(interactCommand);
 
-            ICommand pushCommand = new PushCommand(unitTransform, moveVector);
+            ICommand pushCommand = new PushCommand(unitTransform, moveVector, interactableLayer);
             unitCommandInvoker.AddCommand(pushCommand);
 
             ICommand moveCommand = new MoveUnitCommand(player, unitTransform, moveVector);
