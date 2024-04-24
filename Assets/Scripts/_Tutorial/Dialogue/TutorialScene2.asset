@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: TutorialScene2
   m_EditorClassIdentifier: 
   dialogueLines:
-  - 'Hey, rookie! '
-  - Wake up! You're LATE!!
-  - Use "WASD" to MOVE.
-  - Get your butt up and over here RIGHT. NOW!!!
+  - Hmph...I guess you're not a complete fool, after all.
+  - Fine, here. <Drops Key> I've grown bored of these prisoners anyway.
+  - <Spawns crystals> Oh, you didn't think I was finished, did you?
+  - Try to keep up!
   cameraPriority: 0
