@@ -7,7 +7,10 @@ public class Lever : MonoBehaviour, IInteractable, ISwitch
 {
     public UnityEvent<ISwitch> OnToggle;
     [SerializeField] SpriteRenderer spriteRenderer;
-    bool active = false;
+    public bool active = false;
+    void Start() {
+        OnToggle?.Invoke(this);
+    }
     public void Cancel()
     {
         Debug.Log("cancel lever");

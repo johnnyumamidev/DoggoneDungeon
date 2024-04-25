@@ -16,7 +16,7 @@ public class CameraManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentRoom = rooms[roomIndex];   
+        ChangeRoom(roomIndex);   
     }
 
     // Update is called once per frame
@@ -29,5 +29,9 @@ public class CameraManager : MonoBehaviour
     public void ChangeRoom(int roomNumber) {
         roomIndex = roomNumber;
         currentRoom = rooms[roomIndex];
+
+        if(currentRoom.TryGetComponent(out ScrollingRoom scrollingRoom)) {
+            scrollingRoom.StartScroll();
+        }
     }
 }
