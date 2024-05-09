@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: TutorialScene2
   m_EditorClassIdentifier: 
   dialogueLines:
-  - Hmph...I guess you're not a complete fool, after all.
-  - Fine, here. <Drops Key> I've grown bored of these prisoners anyway.
-  - <Spawns crystals> Oh, you didn't think I was finished, did you?
-  - Try to keep up!
+  - Hmph, looks like you're serious about this...
+  - Fine, here. <Drops Key>
+  - ' I''ve grown bored of these prisoners anyway.'
   cameraPriority: 0

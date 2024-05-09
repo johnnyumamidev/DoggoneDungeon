@@ -8,12 +8,17 @@ public class Key : MonoBehaviour, IPushable
     [SerializeField] UnityEvent keyUsed;
     [SerializeField] TileData tileData;
     [SerializeField] int obstacle;
+    Vector3 target;
+    [SerializeField] float speed = 20;
 
     void OnEnable() {
         if(tileData == null)
             tileData = FindObjectOfType<TileData>();
         
         obstacle = LayerMask.NameToLayer("Obstacle");
+    }
+    void Start() {
+        target = transform.position;
     }
     public bool NoObstacles(Vector2 target)
     {
@@ -40,7 +45,7 @@ public class Key : MonoBehaviour, IPushable
         if(NoObstacles(target) || OnMovingPlatform(target)) {
             if(!OnMovingPlatform(vector)) 
                 transform.parent = null;
-            transform.position += (Vector3)vector;
+            target += (Vector3)vector;
         }
     }
 
@@ -52,6 +57,7 @@ public class Key : MonoBehaviour, IPushable
             keyUsed?.Invoke();
             Destroy(gameObject);
         }
+        transform.position = Vector3.Lerp(transform.position, target, Time.deltaTime * speed);
     }
 
     public bool OnMovingPlatform(Vector2 vector)

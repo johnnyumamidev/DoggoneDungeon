@@ -18,21 +18,17 @@ public class TutorialManager : MonoBehaviour
     {
         if(tutorialTasksCompleted >= tutorialTasks.Length) {
             Debug.Log("tutorial complete!");
-            GameStateManager.Instance.TransitionTo("LevelSelect");
             return;
         }
         currentTask = tutorialTasks[tutorialTasksCompleted];
-       
+        
         if(currentTask.taskComplete) {
-            StartCoroutine(DelayBeforeNextTask(currentTask.waitTimeAfterComplete));
-            GameStateManager.Instance.gamePaused = true;
             tutorialTasksCompleted++;
         }
     }
 
     public void Continue() {
         currentTask.TaskEvent();
-        GameStateManager.Instance.gamePaused = false;
     }
 
     IEnumerator DelayBeforeNextTask(float delay) {
