@@ -11,29 +11,32 @@ public class Player : MonoBehaviour, IUnit, ITrigger
     public Dog dogFollower;
     Vector3 target;
     [SerializeField] float moveSpeed = 2f;
+    [SerializeField] PlayerAnimationHandler playerAnimation;
     public void Move(Vector2 input, bool undo)
     {
         Vector3 position = transform.position + (Vector3)input;
         Vector3 roundedPosition = new Vector3(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.y), 0);
         Collider2D obstacle = Physics2D.OverlapCircle(position, 0.25f, obstacleLayer);
         
+        playerAnimation.GetMoveInput(input);
+
         if(CanMove(position, obstacle)) {
+
             if(obstacle) {
-                Debug.Log(obstacle);
                 IPushable pushable = obstacle.GetComponent<IPushable>();
-                if(pushable == null) {
+                if(pushable == null) 
                     return;
-                }
-                else {
-                    Vector3 tileInFrontOfPushable = position + (Vector3)input; 
-                    if(!pushable.NoObstacles(tileInFrontOfPushable)) 
+
+                playerAnimation.GetPush(input);
+
+                Vector3 tileInFrontOfPushable = position + (Vector3)input; 
+                if(!pushable.NoObstacles(tileInFrontOfPushable)) 
+                    return;
+                
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(position, 0.25f);
+                foreach(Collider2D collider in colliders) {
+                    if(collider.TryGetComponent(out Spikes spikes)) {
                         return;
-                    
-                    Collider2D[] colliders = Physics2D.OverlapCircleAll(position, 0.25f);
-                    foreach(Collider2D collider in colliders) {
-                        if(collider.TryGetComponent(out Spikes spikes)) {
-                            return;
-                        }
                     }
                 }
             }
@@ -94,7 +97,9 @@ public class Player : MonoBehaviour, IUnit, ITrigger
             target = transform.parent.position;
         
         transform.position = Vector3.Lerp(transform.position, target, moveSpeed * Time.deltaTime);
-        
+        if(Vector3.Distance(transform.position, target) < 0.1f) {
+            playerAnimation.ResetParameters();
+        }
         if(tileData == null) 
             return;
 

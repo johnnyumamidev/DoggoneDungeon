@@ -16,7 +16,7 @@ public class TutorialManager : MonoBehaviour
 
     void Update()
     {
-        if(tutorialTasksCompleted >= tutorialTasks.Length) {
+        if(tutorialTasksCompleted > tutorialTasks.Length) {
             Debug.Log("tutorial complete!");
             return;
         }

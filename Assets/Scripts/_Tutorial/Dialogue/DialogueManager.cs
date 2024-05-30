@@ -43,11 +43,11 @@ public class DialogueManager : MonoBehaviour
     IEnumerator TransitionToNextLine() {
         OnDialogueEnd?.Invoke();
         dialogueBox.SetActive(false);
+        currentLineIndex++;
 
         yield return new WaitForSeconds(0.7f);
 
-        if(currentLineIndex < currentScene.dialogueLines.Count - 1) {
-            currentLineIndex++;
+        if(currentLineIndex < currentScene.dialogueLines.Count) {
             StartDialogue();
         }
         else {
